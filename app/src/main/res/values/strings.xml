@@ -17,7 +17,4 @@
     <string name="country">Country</string>
     <string name="category">Category</string>
     <string name="ingredient">Ingredient</string>
-    <string name="daily_meal">Daily Meal</string>
-    <string name="welcome">Welcome</string>
-    <string name="google">Google</string>
 </resources>
