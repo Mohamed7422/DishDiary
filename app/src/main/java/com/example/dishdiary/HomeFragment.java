@@ -1,4 +1,4 @@
-package com.example.dishdiary.ui.signup_compomemts;
+package com.example.dishdiary;
 
 import android.os.Bundle;
 
@@ -8,10 +8,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.dishdiary.R;
 
+public class HomeFragment extends Fragment {
 
-public class SignUpFragment extends Fragment {
 
 
     @Override
@@ -24,6 +23,6 @@ public class SignUpFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_sign_up, container, false);
+        return inflater.inflate(R.layout.fragment_home, container, false);
     }
 }

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.search_compomemts.SearchFragment">
+    tools:context=".SearchFragment">
 
     <androidx.appcompat.widget.SearchView
         android:id="@+id/search"
@@ -24,7 +24,6 @@
         android:layout_height="wrap_content"
         android:text="@string/country"
         android:textAlignment="center"
-        android:background="@drawable/corner_shape"
 
         app:layout_constraintEnd_toStartOf="@+id/chip2"
         app:layout_constraintHorizontal_chainStyle="spread_inside"
@@ -37,7 +36,6 @@
         android:layout_height="wrap_content"
         android:text="@string/ingredient"
         android:textAlignment="center"
-        android:background="@drawable/corner_shape"
         app:layout_constraintEnd_toStartOf="@+id/chip3"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toEndOf="@+id/chip1"
@@ -49,7 +47,6 @@
         android:layout_height="wrap_content"
         android:text="@string/category"
         android:textAlignment="center"
-        android:background="@drawable/corner_shape"
         app:layout_constraintEnd_toEndOf="@id/guideline5"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toEndOf="@+id/chip2"
