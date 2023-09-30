@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape>
+            <solid android:color="@android:color/transparent" /> <!-- Set the shape's background color to transparent -->
+            <corners android:radius="10dp" /> <!-- Adjust the radius to control the corner roundness -->
+            <stroke android:width="0.5dp" android:color="@color/yellow_dark_bg_color" /> <!-- Set the stroke (border) color to yellow -->
+        </shape>
+    </item>
+</selector>
