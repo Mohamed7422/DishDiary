@@ -4,14 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HomeFragment">
+    tools:context=".ui.home_compomemts.HomeFragment">
 
     <TextView
         android:id="@+id/daily_meal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="Daily Meal"
+        android:text="@string/daily_meal"
         android:textColor="@color/yellow_dark_bg_color"
         android:textSize="@dimen/text_size_very_large"
         android:textStyle="bold"
@@ -41,13 +41,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:src="@drawable/food_dish_ic"
-
-
-                />
-
+                tools:layout_editor_absoluteX="0dp"
+                tools:layout_editor_absoluteY="0dp" />
 
             <Button
-
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:layout_margin="20dp"
@@ -123,6 +120,9 @@
         android:id="@+id/button_navigation_bar"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:background="@color/buttom_navigation_bar_color"
+
+        app:layout_constraintHeight_percent="0.1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:menu="@menu/bottom_navigation_menu" />
 

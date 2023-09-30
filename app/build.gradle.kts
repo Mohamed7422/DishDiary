@@ -56,6 +56,14 @@ dependencies {
     //Lotti animation
     implementation ("com.airbnb.android:lottie:6.1.0")
 
+    //RX Java
+    implementation("io.reactivex.rxjava3:rxandroid:3.0.2")
+    implementation("io.reactivex.rxjava3:rxjava:3.1.6")
+
+    //CircleImageView
+
+    implementation ("de.hdodenhof:circleimageview:3.1.0")
+
 
 
 }
