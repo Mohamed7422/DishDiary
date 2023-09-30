@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.signup_compomemts.SignUpFragment"
+    tools:context=".SignUpFragment"
 
 
     >
@@ -26,7 +26,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="35dp"
             android:layout_marginTop="15dp"
-            android:text="@string/welcome"
+            android:text="Welcome"
             android:textColor="@color/black"
             android:textSize="20sp"
             android:textStyle="bold" />
@@ -164,7 +164,7 @@
                 android:backgroundTint="@color/red"
                 android:paddingStart="120dp"
                 android:paddingEnd="120dp"
-                android:text="@string/google"
+                android:text="Google"
                 android:textSize="20sp"
 
                 app:layout_constraintBottom_toBottomOf="parent"
