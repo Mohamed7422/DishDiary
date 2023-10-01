@@ -12,7 +12,7 @@ import java.util.List;
 public class LocalDataBaseImpl implements LocalDB{
 
 
-    private Dao dao;
+    private MealsDao dao;
 
     private static LocalDataBaseImpl instance = null;
     private LocalDataBaseImpl(Context context) {

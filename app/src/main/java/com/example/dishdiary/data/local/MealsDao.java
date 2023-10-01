@@ -2,6 +2,7 @@ package com.example.dishdiary.data.local;
 
 
 import androidx.lifecycle.LiveData;
+import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
@@ -12,7 +13,9 @@ import com.example.dishdiary.data.model.dto.MealsItemDTO;
 
 import java.util.List;
 
-public interface Dao {
+
+@Dao
+public interface MealsDao {
 
     @Query("SELECT * FROM meals")
     LiveData<List<MealsItemDTO>> getAllMeals();

@@ -40,7 +40,7 @@ public class Api_Manager implements RemoteSource {
     }
 
     @Override
-    public void makeRandomMealsCall(NetworkDelegate callback) {
+    public void getDailyMeal(NetworkDelegate callback) {
 
         Call<MealResponse> call= apiService.getRandomMeal();
         call.enqueue(new Callback<MealResponse>() {
@@ -50,6 +50,7 @@ public class Api_Manager implements RemoteSource {
                 if (response.isSuccessful() && response.body() != null) {
 
                    //return the random item which is the first item
+                    //the call of this delegate response in the presenter
                     callback.onMealCallSuccess(response.body().getMeals().get(0));
                     Log.i(TAG, "OnResponse :" + response.body().getMeals());
                 }
