@@ -13,7 +13,7 @@ import com.example.dishdiary.data.model.dto.MealsItemDTO;
 public abstract class DatabaseApp extends RoomDatabase {
     private static DatabaseApp instance = null;
 
-        public abstract Dao dao();
+        public abstract MealsDao dao();
     public static synchronized DatabaseApp getInstance(Context context){
         if (instance == null){
             instance = Room.databaseBuilder(context.getApplicationContext()

@@ -2,7 +2,7 @@ package com.example.dishdiary.data.remote;
 
 public interface RemoteSource {
     //make retrofit builder
-    void makeRandomMealsCall(NetworkDelegate callback);
+    void getDailyMeal(NetworkDelegate callback);
     void getCategories(NetworkDelegate callback);
     void getCountries(NetworkDelegate callback);
     void getIngredients(NetworkDelegate callback);
