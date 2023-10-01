@@ -29,7 +29,7 @@ public interface ApiService {
     Call<MealResponse> getMealsByName(@Query("s") String mealName);
 
     @GET("lookup.php")
-    Call<MealResponse> getMealInfo(@Query("i") String id);
+    Call<MealResponse> getMealInfo(@Query("i") int id);
 
     @GET("filter.php")
     Call<MealResponse> getMealByCountry(@Query("a")String country);

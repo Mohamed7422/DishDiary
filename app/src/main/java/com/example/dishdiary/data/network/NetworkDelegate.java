@@ -2,9 +2,29 @@ package com.example.dishdiary.data.network;
 
 
 
+import com.example.dishdiary.data.model.dto.CategoryDTO;
+import com.example.dishdiary.data.model.dto.CountryDTO;
+import com.example.dishdiary.data.model.dto.IngredientDTO;
 import com.example.dishdiary.data.model.dto.MealsItemDTO;
-  public interface NetworkDelegate {
 
-     void onSuccess(MealsItemDTO dailyMeal);
-     void onFailure(String errorMsg);
+import java.util.List;
+
+public interface NetworkDelegate {
+
+     void onMealCallSuccess(MealsItemDTO dailyMeal);
+     void onMealCallFailure(String errorMsg);
+
+     void onCategoryCallSuccess(List<CategoryDTO> categoriesList);
+     void onCategoryCallFailure(String errorMsg);
+
+     void onCountryCallSuccess(List<CountryDTO> countriesList);
+     void onCountryCallFailure(String errorMsg);
+
+     void onIngredientCallSuccess(List<IngredientDTO> ingredientsList);
+     void onIngredientCallFailure(String errorMsg);
+
+         //*******************************************//
+     //Delegates for the filter search
+     void onFilterSuccess(List<MealsItemDTO> meals);
+      void onFilterFailure(String errorMsg);
 }
