@@ -10,13 +10,18 @@ import androidx.room.PrimaryKey;
 import com.google.gson.annotations.SerializedName;
 
 import org.jetbrains.annotations.NotNull;
-@Entity(tableName = "meals")
-public class MealsItemDTO implements Parcelable {
 
-    public MealsItemDTO() {
+@Entity(tableName = "mealPlan")
+public class MealPlanDTO implements Parcelable {
+
+
+    private String day;
+
+    public MealPlanDTO() {
     }
 
-    public MealsItemDTO(@NotNull String idMeal, String mealName, String strDrinkAlternate, String strCategory, String strArea, String strInstructions, String strMealThumb, String strTags, String strYoutube, String strIngredient1, String strIngredient2, String strIngredient3, String strIngredient4, String strIngredient5, String strIngredient6, String strIngredient7, String strIngredient8, String strIngredient9, String strIngredient10, String strIngredient11, String strIngredient12, String strIngredient13, String strIngredient14, String strIngredient15, String strIngredient16, String strIngredient17, String strIngredient18, String strIngredient19, String strIngredient20, String strMeasure1, String strMeasure2, String strMeasure3, String strMeasure4, String strMeasure5, String strMeasure6, String strMeasure7, String strMeasure8, String strMeasure9, String strMeasure10, String strMeasure11, String strMeasure12, String strMeasure13, String strMeasure14, String strMeasure15, String strMeasure16, String strMeasure17, String strMeasure18, String strMeasure19, String strMeasure20, String strSource, String strImageSource, String strCreativeCommonsConfirmed, String dateModified) {
+
+    public MealPlanDTO(@NotNull String idMeal, String mealName, String strDrinkAlternate, String strCategory, String strArea, String strInstructions, String strMealThumb, String strTags, String strYoutube, String strIngredient1, String strIngredient2, String strIngredient3, String strIngredient4, String strIngredient5, String strIngredient6, String strIngredient7, String strIngredient8, String strIngredient9, String strIngredient10, String strIngredient11, String strIngredient12, String strIngredient13, String strIngredient14, String strIngredient15, String strIngredient16, String strIngredient17, String strIngredient18, String strIngredient19, String strIngredient20, String strMeasure1, String strMeasure2, String strMeasure3, String strMeasure4, String strMeasure5, String strMeasure6, String strMeasure7, String strMeasure8, String strMeasure9, String strMeasure10, String strMeasure11, String strMeasure12, String strMeasure13, String strMeasure14, String strMeasure15, String strMeasure16, String strMeasure17, String strMeasure18, String strMeasure19, String strMeasure20, String strSource, String strImageSource, String strCreativeCommonsConfirmed, String dateModified) {
         this.idMeal = idMeal;
         this.mealName = mealName;
         this.strDrinkAlternate = strDrinkAlternate;
@@ -658,6 +663,14 @@ public class MealsItemDTO implements Parcelable {
         this.dateModified = dateModified;
     }
 
+    public String getDay() {
+        return day;
+    }
+
+    public void setDay(String day) {
+        this.day = day;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -720,7 +733,7 @@ public class MealsItemDTO implements Parcelable {
         dest.writeString(dateModified);
     }
 
-    protected MealsItemDTO(Parcel in) {
+    protected MealPlanDTO(Parcel in) {
         idMeal = in.readString();
         mealName = in.readString();
         strDrinkAlternate = in.readString();
@@ -774,17 +787,21 @@ public class MealsItemDTO implements Parcelable {
         strImageSource = in.readString();
         strCreativeCommonsConfirmed = in.readString();
         dateModified = in.readString();
+        day = in.readString();
     }
 
-    public static final Creator<MealsItemDTO> CREATOR = new Creator<MealsItemDTO>() {
+    public static final Parcelable.Creator<MealPlanDTO> CREATOR = new Parcelable.Creator<MealPlanDTO>() {
         @Override
-        public MealsItemDTO createFromParcel(Parcel in) {
-            return new MealsItemDTO(in);
+        public MealPlanDTO createFromParcel(Parcel in) {
+            return new MealPlanDTO(in);
         }
 
         @Override
-        public MealsItemDTO[] newArray(int size) {
-            return new MealsItemDTO[size];
+        public MealPlanDTO[] newArray(int size) {
+            return new MealPlanDTO[size];
         }
     };
+
+
+
 }
