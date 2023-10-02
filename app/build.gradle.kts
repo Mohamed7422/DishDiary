@@ -61,9 +61,11 @@ dependencies {
     implementation("io.reactivex.rxjava3:rxjava:3.1.6")
 
     //CircleImageView
-
     implementation ("de.hdodenhof:circleimageview:3.1.0")
 
+    //Navigation
+    implementation ("androidx.navigation:navigation-fragment:2.5.3")
+    implementation ("androidx.navigation:navigation-ui:2.5.3")
 
 
 }
