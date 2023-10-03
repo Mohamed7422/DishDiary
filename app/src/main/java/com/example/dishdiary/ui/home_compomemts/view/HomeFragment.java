@@ -7,18 +7,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.NavigationUI;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -31,12 +26,9 @@ import com.example.dishdiary.data.model.dto.CategoryDTO;
 import com.example.dishdiary.data.model.dto.CountryDTO;
 import com.example.dishdiary.data.model.dto.MealsItemDTO;
 import com.example.dishdiary.data.remote.Api_Manager;
-import com.example.dishdiary.ui.MealDetailActivity;
-import com.example.dishdiary.ui.favourite_compomemts.FavouriteMealsFragment;
+import com.example.dishdiary.ui.meal_details_components.view.MealDetailActivity;
 import com.example.dishdiary.ui.home_compomemts.presenter.HomePresenter;
 import com.example.dishdiary.ui.home_compomemts.presenter.IHomePresenter;
-import com.example.dishdiary.ui.search_compomemts.SearchFragment;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 
 import java.util.ArrayList;
@@ -145,7 +137,10 @@ public class HomeFragment extends Fragment  implements IHomeFragment ,OnItemClic
             @Override
             public void onClick(View v) {
               //open activity Detail
-                startActivity(new Intent(getActivity(), MealDetailActivity.class));
+                //send the object to meal details activity
+                Intent intent = new Intent(getActivity(),MealDetailActivity.class);
+                intent.putExtra("mealItem",mealsItemDTO);
+                startActivity(intent);
             }
         });
 
