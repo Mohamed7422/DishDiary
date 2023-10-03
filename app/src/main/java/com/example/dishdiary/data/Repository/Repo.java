@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData;
 
 import com.example.dishdiary.data.model.dto.MealPlanDTO;
 import com.example.dishdiary.data.model.dto.MealsItemDTO;
+import com.example.dishdiary.data.remote.FilterNetworkDelegate;
 import com.example.dishdiary.data.remote.NetworkDelegate;
 
 import java.util.List;
@@ -15,12 +16,12 @@ public interface Repo {
     void getCountries(NetworkDelegate callback);
     void getIngredients(NetworkDelegate callback);
     /*****************************************/
-    void filterByFirstLetter(String fLetter,NetworkDelegate callback);
-    void filterByName(String mealName,NetworkDelegate callback);
-    void getMealByID(int mealId,NetworkDelegate callback);
-    void filterByCountry(String query,NetworkDelegate callback);
-    void filterByIngredient(String query,NetworkDelegate callback);
-    void filterByCategory(String query,NetworkDelegate callback);
+    void filterByFirstLetter(String fLetter, FilterNetworkDelegate callback);
+    void filterByName(String mealName,FilterNetworkDelegate callback);
+    void getMealByID(int mealId,FilterNetworkDelegate callback);
+    void filterByCountry(String query,FilterNetworkDelegate callback);
+    void filterByIngredient(String query,FilterNetworkDelegate callback);
+    void filterByCategory(String query,FilterNetworkDelegate callback);
 
 
     /***********************************************/

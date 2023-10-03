@@ -7,6 +7,7 @@ import androidx.lifecycle.LiveData;
 import com.example.dishdiary.data.local.LocalDB;
 import com.example.dishdiary.data.model.dto.MealPlanDTO;
 import com.example.dishdiary.data.model.dto.MealsItemDTO;
+import com.example.dishdiary.data.remote.FilterNetworkDelegate;
 import com.example.dishdiary.data.remote.NetworkDelegate;
 import com.example.dishdiary.data.remote.RemoteSource;
 
@@ -56,32 +57,32 @@ public class RepoImpl implements Repo {
     }
 
     @Override
-    public void filterByFirstLetter(String fLetter, NetworkDelegate callback) {
+    public void filterByFirstLetter(String fLetter, FilterNetworkDelegate callback) {
     remoteSource.filterByFirstLetter(fLetter,callback);
     }
 
     @Override
-    public void filterByName(String mealName, NetworkDelegate callback) {
+    public void filterByName(String mealName, FilterNetworkDelegate callback) {
     remoteSource.filterByName(mealName,callback);
     }
 
     @Override
-    public void getMealByID(int mealId, NetworkDelegate callback) {
+    public void getMealByID(int mealId, FilterNetworkDelegate callback) {
     remoteSource.getMealByID(mealId,callback);
     }
 
     @Override
-    public void filterByCountry(String query, NetworkDelegate callback) {
+    public void filterByCountry(String query, FilterNetworkDelegate callback) {
     remoteSource.filterByCountry(query,callback);
     }
 
     @Override
-    public void filterByIngredient(String query, NetworkDelegate callback) {
+    public void filterByIngredient(String query, FilterNetworkDelegate callback) {
     remoteSource.filterByIngredient(query,callback);
     }
 
     @Override
-    public void filterByCategory(String query, NetworkDelegate callback) {
+    public void filterByCategory(String query, FilterNetworkDelegate callback) {
     remoteSource.filterByCategory(query,callback);
     }
 

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.home_compomemts.HomeFragment">
+    tools:context=".ui.home_compomemts.view.HomeFragment">
 
     <TextView
         android:id="@+id/daily_meal"
@@ -25,41 +25,57 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="10dp"
-
+        app:cardElevation="11dp"
 
         app:cardCornerRadius="15dp"
         app:layout_constraintHeight_percent="0.3"
         app:layout_constraintStart_toStartOf="@id/guideline"
+        app:layout_constraintEnd_toEndOf="@id/guideline3"
         app:layout_constraintTop_toBottomOf="@id/daily_meal"
-        app:layout_constraintWidth_percent="0.8">
+        >
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            >
 
             <ImageView
+                android:id="@+id/dailyImage"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:src="@drawable/food_dish_ic"
-                tools:layout_editor_absoluteX="0dp"
-                tools:layout_editor_absoluteY="0dp" />
+                android:scaleType="fitXY"
 
-            <Button
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_margin="20dp"
-                android:background="@drawable/baseline_favorite"
-                app:layout_constraintBottom_toTopOf="@id/calender_btn"
-                app:layout_constraintEnd_toEndOf="parent" />
+                 />
 
-            <Button
-                android:id="@+id/calender_btn"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_margin="20dp"
-                android:background="@drawable/outline_calendar_view_weak"
+
+            <TextView
+               android:id="@+id/daily_meal_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="lsgos"
+                android:textColor="@color/black"
+
+                android:padding="5dp"
+                android:background="@drawable/corner_shape"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" />
+                android:layout_marginStart="15dp"
+                android:layout_marginBottom="15dp"
+                app:layout_constraintStart_toStartOf="parent"
+
+                />
+
+
+            <ImageView
+                android:id="@+id/addToFavouriteBtn"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_margin="20dp"
+                android:background="@drawable/baseline_favorite_border"
+                app:layout_constraintTop_toTopOf="parent"
+                 app:layout_constraintEnd_toEndOf="parent" />
+
+
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -116,29 +132,21 @@
         app:layout_constraintStart_toStartOf="@id/guideline"
         app:layout_constraintTop_toBottomOf="@id/country" />
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/button_navigation_bar"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:background="@color/buttom_navigation_bar_color"
 
-        app:layout_constraintHeight_percent="0.1"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:menu="@menu/bottom_navigation_menu" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_begin="30dp" />
+        app:layout_constraintGuide_begin="15dp" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_end="30dp" />
+        app:layout_constraintGuide_end="15dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

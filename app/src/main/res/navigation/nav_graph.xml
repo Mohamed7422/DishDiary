@@ -3,70 +3,28 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/splashFragment">
-
-    <fragment
-        android:id="@+id/splashFragment"
-        android:name="com.example.dishdiary.SplashFragment"
-        android:label="fragment_splash"
-        tools:layout="@layout/fragment_splash" >
-        <action
-            android:id="@+id/action_splashFragment_to_logInFragment"
-            app:destination="@id/logInFragment"
-            app:popUpTo="@id/splashFragment"
-            app:popUpToInclusive="true"
-            />
-    </fragment>
-    <fragment
-        android:id="@+id/logInFragment"
-        android:name="com.example.dishdiary.ui.log_in_compomemts.LogInFragment"
-        android:label="fragment_log_in"
-        tools:layout="@layout/fragment_log_in" >
-        <action
-            android:id="@+id/action_logInFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/signUpFragment"
-        android:name="com.example.dishdiary.ui.signup_compomemts.SignUpFragment"
-        android:label="fragment_sign_up"
-        tools:layout="@layout/fragment_sign_up" />
+    app:startDestination="@id/homeFragment">
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.example.dishdiary.ui.home_compomemts.HomeFragment"
-        android:label="fragment_home"
-        tools:layout="@layout/fragment_home" >
-        <action
-            android:id="@+id/action_homeFragment_to_searchFragment"
-            app:destination="@id/searchFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/favouriteMealsFragment"
-        android:name="com.example.dishdiary.ui.favourite_compomemts.FavouriteMealsFragment"
-        android:label="fragment_favourite_meals"
-        tools:layout="@layout/fragment_favourite_meals" >
-        <action
-            android:id="@+id/action_favouriteMealsFragment_to_weaklyPlanFragment"
-            app:destination="@id/weaklyPlanFragment" />
-    </fragment>
+        android:name="com.example.dishdiary.ui.home_compomemts.view.HomeFragment"
+        android:label="HomeFragment"
+        tools:layout="@layout/fragment_home"
+        />
     <fragment
         android:id="@+id/searchFragment"
         android:name="com.example.dishdiary.ui.search_compomemts.SearchFragment"
         android:label="fragment_search"
-        tools:layout="@layout/fragment_search" >
-        <action
-            android:id="@+id/action_searchFragment_to_favouriteMealsFragment"
-            app:destination="@id/favouriteMealsFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_search" />
+    <fragment
+        android:id="@+id/favouriteMealsFragment"
+        android:name="com.example.dishdiary.ui.favourite_compomemts.FavouriteMealsFragment"
+        android:label="fragment_favourite_meals"
+        tools:layout="@layout/fragment_favourite_meals" />
     <fragment
         android:id="@+id/weaklyPlanFragment"
         android:name="com.example.dishdiary.ui.weakly_plan_compomemts.WeaklyPlanFragment"
         android:label="fragment_weakly_plan"
-        tools:layout="@layout/fragment_weakly_plan" >
-        <action
-            android:id="@+id/action_weaklyPlanFragment_to_profileFragment"
-            app:destination="@id/profileFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_weakly_plan" />
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.example.dishdiary.ui.profile_compomemts.ProfileFragment"
