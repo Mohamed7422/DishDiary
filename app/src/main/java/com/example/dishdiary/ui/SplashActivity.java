@@ -14,7 +14,7 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
-import com.example.dishdiary.databinding.ActivitySplashBinding;
+
 
 import com.example.dishdiary.R;
 

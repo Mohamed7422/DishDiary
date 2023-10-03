@@ -3,6 +3,8 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="5dp"
+    app:cardCornerRadius="15dp"
 
     >
 
@@ -10,15 +12,33 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
                 >
-        <de.hdodenhof.circleimageview.CircleImageView
+
+        <ImageView
+            android:id="@+id/country_image"
             android:layout_width="96dp"
             android:layout_height="96dp"
             android:src="@drawable/egypt_ic"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:civ_border_width="2dp"
+            android:scaleType="fitXY"
             app:civ_border_color="#FFC107"
+            app:civ_border_width="2dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
 
+            />
+
+        <TextView
+            android:id="@+id/country_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/corner_shape"
+            android:text="jsdgsgs"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:padding="2dp"
+            android:layout_margin="2dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             />
 
 

@@ -24,7 +24,6 @@ public interface NetworkDelegate {
      void onIngredientCallFailure(String errorMsg);
 
          //*******************************************//
-     //Delegates for the filter search
-     void onFilterSuccess(List<MealsItemDTO> meals);
-      void onFilterFailure(String errorMsg);
+
+
 }

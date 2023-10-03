@@ -1,5 +1,6 @@
 package com.example.dishdiary.ui.log_in_compomemts;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -11,7 +12,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.example.dishdiary.MainActivity;
 import com.example.dishdiary.R;
+import com.example.dishdiary.ui.SplashActivity;
 
 public class LogInFragment extends Fragment {
 
@@ -32,8 +35,8 @@ public class LogInFragment extends Fragment {
         logIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NavController navController = Navigation.findNavController(view);
-               navController.navigate(R.id.action_logInFragment_to_homeFragment);
+                 Intent intent = new Intent(getActivity(),MainActivity.class);
+                 startActivity(intent);
             }
         });
         return view;

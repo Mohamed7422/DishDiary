@@ -58,6 +58,7 @@ public class Api_Manager implements RemoteSource {
             @Override
             public void onFailure(@NonNull Call<MealResponse> call, Throwable t) {
                 callback.onMealCallFailure(t.getLocalizedMessage());
+                Log.i(TAG,"onFailure: from api manager");
             }
         });
     }
@@ -70,12 +71,16 @@ public class Api_Manager implements RemoteSource {
             if (response.isSuccessful()) {
                 assert response.body() != null;
                 callback.onCategoryCallSuccess(response.body().getCategoryList());
+                System.out.println("Get data Categ"+response.body());
+                Log.i(TAG,"onFailure: from api manager");
             }
             }
 
           @Override
           public void onFailure(Call<CategoriesResponse> call, Throwable t) {
                  callback.onCategoryCallFailure(t.getLocalizedMessage());
+              System.out.println(t.getLocalizedMessage());
+              Log.i(TAG,"onFailure: from api manager");
           }
       });
    }
@@ -117,7 +122,7 @@ public class Api_Manager implements RemoteSource {
     }
 
     @Override
-    public void filterByFirstLetter(String fLetterQuery,NetworkDelegate callback) {
+    public void filterByFirstLetter(String fLetterQuery,FilterNetworkDelegate callback) {
            apiService.searchByFirstLetter(fLetterQuery).enqueue(new Callback<MealResponse>() {
                @Override
                public void onResponse(Call<MealResponse> call, Response<MealResponse> response) {
@@ -137,7 +142,7 @@ public class Api_Manager implements RemoteSource {
     }
 
     @Override
-    public void filterByName(String mealName,NetworkDelegate callback) {
+    public void filterByName(String mealName,FilterNetworkDelegate callback) {
       apiService.getMealsByName(mealName).enqueue(new Callback<MealResponse>() {
           @Override
           public void onResponse(Call<MealResponse> call, Response<MealResponse> response) {
@@ -150,12 +155,13 @@ public class Api_Manager implements RemoteSource {
           @Override
           public void onFailure(Call<MealResponse> call, Throwable t) {
               callback.onFilterFailure(t.getLocalizedMessage());
+              Log.i(TAG,"onFailure: from api manager");
           }
       });
     }
 
     @Override
-    public void getMealByID(int mealId,NetworkDelegate callback) {
+    public void getMealByID(int mealId,FilterNetworkDelegate callback) {
         apiService.getMealInfo(mealId).enqueue(new Callback<MealResponse>() {
             @Override
             public void onResponse(Call<MealResponse> call, Response<MealResponse> response) {
@@ -175,7 +181,7 @@ public class Api_Manager implements RemoteSource {
     }
 
     @Override
-    public void filterByCountry(String query, NetworkDelegate callback) {
+    public void filterByCountry(String query, FilterNetworkDelegate callback) {
            apiService.getMealByCountry(query).enqueue(new Callback<MealResponse>() {
                @Override
                public void onResponse(Call<MealResponse> call, Response<MealResponse> response) {
@@ -192,7 +198,7 @@ public class Api_Manager implements RemoteSource {
     }
 
     @Override
-    public void filterByIngredient(String query, NetworkDelegate callback) {
+    public void filterByIngredient(String query, FilterNetworkDelegate callback) {
         apiService.getMealByIngredient(query).enqueue(new Callback<MealResponse>() {
             @Override
             public void onResponse(Call<MealResponse> call, Response<MealResponse> response) {
@@ -209,7 +215,7 @@ public class Api_Manager implements RemoteSource {
     }
 
     @Override
-    public void filterByCategory(String query, NetworkDelegate callback) {
+    public void filterByCategory(String query, FilterNetworkDelegate callback) {
                apiService.getMealByCategory(query).enqueue(new Callback<MealResponse>() {
                    @Override
                    public void onResponse(Call<MealResponse> call, Response<MealResponse> response) {

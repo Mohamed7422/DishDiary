@@ -96,4 +96,8 @@ public class HomePresenter implements IHomePresenter , NetworkDelegate {
     public void onIngredientCallFailure(String errorMsg) {
 
     }
+
+
+
+
 }

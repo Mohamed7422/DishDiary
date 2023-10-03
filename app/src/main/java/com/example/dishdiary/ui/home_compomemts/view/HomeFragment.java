@@ -65,8 +65,6 @@ public class HomeFragment extends Fragment  implements IHomeFragment ,OnItemClic
     boolean clicked = false;
 
 
-//create constructor if necessary
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -172,8 +170,7 @@ public class HomeFragment extends Fragment  implements IHomeFragment ,OnItemClic
             }
         });
 
-        //implement add to plan button
-
+      
 
 
     }
