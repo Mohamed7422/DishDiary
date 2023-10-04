@@ -1,9 +1,162 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.MealDetailActivity">
+    android:layout_height="match_parent" >
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.meal_details_components.view.MealDetailActivity">
+
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_item"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="10dp"
+            app:cardCornerRadius="15dp"
+            app:cardElevation="11dp"
+            app:layout_constraintEnd_toEndOf="@id/guideline9"
+            app:layout_constraintHeight_percent="0.25"
+            app:layout_constraintStart_toStartOf="@id/guideline8"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/itemImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/food_dish_ic"
+
+                    />
+
+
+                <TextView
+                    android:id="@+id/meal_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginBottom="15dp"
+
+                    android:background="@drawable/corner_shape"
+                    android:padding="5dp"
+                    tools:text="lsgos"
+                    android:textColor="@color/black"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+
+                    />
+
+
+                <ImageView
+                    android:id="@+id/addMealToFavouriteBtn"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_margin="20dp"
+                    android:background="@drawable/baseline_favorite_border"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/addToCalender"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_margin="20dp"
+                    android:background="@drawable/outline_calendar_view_weak"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/addMealToFavouriteBtn" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/ingredientTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Ingredient"
+            android:textColor="@color/yellow_dark_bg_color"
+            android:textSize="@dimen/text_size_very_large"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@id/guideline8"
+            app:layout_constraintTop_toBottomOf="@+id/card_item" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/ingredientItemRV"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+
+            app:layout_constraintTop_toBottomOf="@id/ingredientTV"
+            app:layout_constraintStart_toStartOf="@id/guideline8"
+            app:layout_constraintEnd_toEndOf="@id/guideline9"
+
+            />
+
+
+        <TextView
+            android:id="@+id/recipeTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Recipe"
+            android:textColor="@color/yellow_dark_bg_color"
+            android:textSize="@dimen/text_size_very_large"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@id/guideline8"
+            app:layout_constraintTop_toBottomOf="@id/ingredientItemRV" />
+
+        <TextView
+            android:id="@+id/recipeContent"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/alata"
+
+
+            android:padding="5dp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@id/guideline9"
+            app:layout_constraintStart_toStartOf="@id/guideline8"
+            app:layout_constraintTop_toBottomOf="@id/recipeTV"
+            tools:text="kjdhgius dikj\nsdgsdfghssdgsdg" />
+
+        <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
+            android:id="@+id/videoContentPlayer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:autoPlay="false"
+            app:layout_constraintTop_toBottomOf="@id/recipeContent"
+
+            app:layout_constraintStart_toStartOf="@id/guideline8"
+            app:layout_constraintEnd_toEndOf="@id/guideline9"
+            />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="11dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="11dp" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

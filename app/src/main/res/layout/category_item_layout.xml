@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_margin="5dp"
-    app:cardElevation="10dp"
+    app:cardElevation="5dp"
     app:cardCornerRadius="15dp"
     >
 
@@ -19,7 +19,7 @@
             android:src="@drawable/food_dish_ic"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-
+            android:scaleType="fitXY"
 
             />
 
@@ -33,7 +33,6 @@
             android:textStyle="bold"
             android:paddingStart="10dp"
             android:paddingEnd="10dp"
-
 
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
