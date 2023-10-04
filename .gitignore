@@ -15,6 +15,10 @@ build/
 
 # Gradle files
 .gradle/
+.gradle/8.0/checksums/checksums.lock
+.gradle/8.0/checksums/sha1-checksums.bin
+.gradle/buildOutputCleanup/outputFiles.bin
+.gradle/file-system.probe
 /build/
 /captures/
 
