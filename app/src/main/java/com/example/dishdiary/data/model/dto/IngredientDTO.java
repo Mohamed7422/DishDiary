@@ -3,6 +3,11 @@ package com.example.dishdiary.data.model.dto;
 public class IngredientDTO {
     public IngredientDTO() {
     }
+    public IngredientDTO(String strIngredient, String strDescription) {
+        this.strIngredient = strIngredient;
+        this.strDescription = strDescription;
+    }
+
 
     private String idIngredient;
     private String strIngredient;

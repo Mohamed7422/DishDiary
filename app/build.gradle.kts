@@ -67,5 +67,8 @@ dependencies {
     implementation ("androidx.navigation:navigation-fragment:2.5.3")
     implementation ("androidx.navigation:navigation-ui:2.5.3")
 
+    //video player for youtube
+    implementation ("com.pierfrancescosoffritti.androidyoutubeplayer:core:12.1.0")
+
 
 }
