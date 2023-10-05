@@ -9,17 +9,16 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.dishdiary.R;
-import com.example.dishdiary.ui.home_compomemts.view.OnItemClickListener;
 
 public class Favourite_recycler_adapter extends RecyclerView.Adapter<Favourite_recycler_adapter.ViewHolder>{
 
     private Context context;
 
-    private OnItemClickListener onItemClickListener;
 
-    public Favourite_recycler_adapter(Context _context, OnItemClickListener _onItemClickListener ){
+
+    public Favourite_recycler_adapter(Context _context  ){
         this.context = _context;
-        this.onItemClickListener = _onItemClickListener;
+
 
     }
 

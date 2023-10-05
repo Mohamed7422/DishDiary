@@ -167,8 +167,7 @@ public class Api_Manager implements RemoteSource {
             public void onResponse(Call<MealResponse> call, Response<MealResponse> response) {
                 if (response.isSuccessful()){
 
-                    assert response.body() != null;
-                    callback.onFilterSuccess(response.body().getMeals());
+                    callback.onGetMealByIdSuccess(response.body().getMeals());
 
                 }
             }

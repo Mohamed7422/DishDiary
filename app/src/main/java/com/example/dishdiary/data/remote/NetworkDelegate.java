@@ -14,6 +14,8 @@ public interface NetworkDelegate {
      void onMealCallSuccess(MealsItemDTO dailyMeal);
      void onMealCallFailure(String errorMsg);
 
+
+
      void onCategoryCallSuccess(List<CategoryDTO> categoriesList);
      void onCategoryCallFailure(String errorMsg);
 
