@@ -25,7 +25,7 @@
     </fragment>
     <fragment
         android:id="@+id/favouriteMealsFragment"
-        android:name="com.example.dishdiary.ui.favourite_compomemts.FavouriteMealsFragment"
+        android:name="com.example.dishdiary.ui.favourite_compomemts.view.FavouriteMealsFragment"
         android:label="fragment_favourite_meals"
         tools:layout="@layout/fragment_favourite_meals" >
         <action

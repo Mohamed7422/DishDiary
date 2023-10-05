@@ -4,9 +4,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.favourite_compomemts.FavouriteMealsFragment">
+    tools:context=".ui.favourite_compomemts.view.FavouriteMealsFragment">
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/favourite_meals_RV"
         android:layout_width="0dp"
         android:layout_height="match_parent"
 
