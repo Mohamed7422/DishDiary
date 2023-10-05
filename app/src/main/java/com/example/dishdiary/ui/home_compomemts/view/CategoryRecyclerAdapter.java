@@ -8,13 +8,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.dishdiary.R;
 import com.example.dishdiary.data.model.dto.CategoryDTO;
-
-import org.w3c.dom.Text;
 
 import java.util.List;
 
@@ -22,12 +21,12 @@ public class CategoryRecyclerAdapter extends RecyclerView.Adapter<CategoryRecycl
 
     private Context context;
 
-    private OnItemClickListener onItemClickListener;
+    private OnCategoryItemClickListener onCategoryItemClickListener;
     private List<CategoryDTO> categoriesList;
 
-    public CategoryRecyclerAdapter(Context _context,List<CategoryDTO> categoriesList, OnItemClickListener _onItemClickListener ){
+    public CategoryRecyclerAdapter(Context _context,List<CategoryDTO> categoriesList, OnCategoryItemClickListener _onCategoryItemClickListener){
         this.context = _context;
-        this.onItemClickListener = _onItemClickListener;
+        this.onCategoryItemClickListener = _onCategoryItemClickListener;
         this.categoriesList = categoriesList;
     }
 
@@ -36,6 +35,11 @@ public class CategoryRecyclerAdapter extends RecyclerView.Adapter<CategoryRecycl
 //        notifyDataSetChanged();
 //
 //    }
+public interface OnCategoryItemClickListener {
+    //pass the parameter
+    void onCategoryItemClickListener(CategoryDTO categoryDTO);
+}
+
 
     @NonNull
     @Override
@@ -57,6 +61,14 @@ public class CategoryRecyclerAdapter extends RecyclerView.Adapter<CategoryRecycl
                 .error(R.drawable.ic_launcher_foreground)
                 .into(holder.categoryImg);
 
+        holder.categoryCard.setOnClickListener(item -> {
+
+            onCategoryItemClickListener.onCategoryItemClickListener(category);
+
+        });
+
+
+
 
     }
 
@@ -74,15 +86,19 @@ public class CategoryRecyclerAdapter extends RecyclerView.Adapter<CategoryRecycl
         return categoriesList.size();
     }
 
+
+
     class ViewHolder extends RecyclerView.ViewHolder{
 
       ImageView categoryImg;
       TextView categoryName;
+      CardView categoryCard;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
            categoryImg = itemView.findViewById(R.id.category_image_item);
            categoryName = itemView.findViewById(R.id.category_name);
+            categoryCard = itemView.findViewById(R.id.categoryCard);
         }
     }
 }

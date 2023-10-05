@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -19,6 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.dishdiary.Constants;
 import com.example.dishdiary.R;
 import com.example.dishdiary.data.Repository.RepoImpl;
 import com.example.dishdiary.data.local.LocalDataBaseImpl;
@@ -35,7 +37,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class HomeFragment extends Fragment  implements IHomeFragment ,OnItemClickListener {
+public class HomeFragment extends Fragment  implements IHomeFragment , CategoryRecyclerAdapter.OnCategoryItemClickListener,
+        CountryRecyclerAdapter.OnCountryItemClickListener {
     private final String TAG = "HOME Fragment Tag";
 
     RecyclerView categoryRecyclerView;
@@ -78,15 +81,13 @@ public class HomeFragment extends Fragment  implements IHomeFragment ,OnItemClic
 
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         initViews(view);
-        setListeners();
+
 
 
         return view;
     }
 
-    private void setListeners() {
 
-    }
 
     private void initViews(View view) {
 
@@ -195,7 +196,20 @@ public class HomeFragment extends Fragment  implements IHomeFragment ,OnItemClic
     }
 
     @Override
-    public void onItemClick() {
+    public void onCategoryItemClickListener(CategoryDTO categoryDTO) {
+       Bundle bundle = new Bundle();
+       bundle.putInt("state", Constants.CATEGORIES);
+       bundle.putString("filter",categoryDTO.getStrCategory());
+        Navigation.findNavController(getView()).navigate(R.id.action_homeFragment_to_searchFragment2
+                ,bundle);
+    }
 
+    @Override
+    public void onCountryItemClickListener(CountryDTO countryDTO) {
+        Bundle bundle = new Bundle();
+        bundle.putInt("state",Constants.COUNTRIES);
+        bundle.putString("filter",countryDTO.getStrArea());
+        Navigation.findNavController(getView()).navigate(R.id.action_homeFragment_to_searchFragment2,
+                bundle);
     }
 }

@@ -8,10 +8,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.dishdiary.R;
+import com.example.dishdiary.data.model.dto.CategoryDTO;
 import com.example.dishdiary.data.model.dto.CountryDTO;
 
 import java.util.List;
@@ -24,12 +26,12 @@ public class CountryRecyclerAdapter extends RecyclerView.Adapter<CountryRecycler
     private List<CountryDTO> countriesList;
     private String[] flags;
 
-    private OnItemClickListener onItemClickListener;
+    private OnCountryItemClickListener onCountryItemClickListener;
 
 
-    public CountryRecyclerAdapter(Context _context, List<CountryDTO> countriesList, OnItemClickListener _onItemClickListener ){
+    public CountryRecyclerAdapter(Context _context, List<CountryDTO> countriesList, OnCountryItemClickListener onCountryItemClickListener ){
         this.context = _context;
-        this.onItemClickListener = _onItemClickListener;
+        this.onCountryItemClickListener = onCountryItemClickListener;
         this.countriesList = countriesList;
         this.flags = context.getResources().getStringArray(R.array.flags);
 
@@ -40,6 +42,12 @@ public class CountryRecyclerAdapter extends RecyclerView.Adapter<CountryRecycler
        notifyDataSetChanged();
 
     }
+
+    public interface OnCountryItemClickListener {
+        //pass the parameter
+        void onCountryItemClickListener(CountryDTO countryDTO);
+    }
+
 
     @NonNull
     @Override
@@ -60,6 +68,13 @@ public class CountryRecyclerAdapter extends RecyclerView.Adapter<CountryRecycler
                .placeholder(R.drawable.ic_launcher_foreground)
                .error(R.drawable.ic_launcher_foreground)
                .into(holder.circleImageView);
+        holder.countryCard.setOnClickListener(item ->{
+
+            onCountryItemClickListener.onCountryItemClickListener(countryDTO);
+
+        });
+
+
 
     }
 
@@ -75,11 +90,16 @@ public class CountryRecyclerAdapter extends RecyclerView.Adapter<CountryRecycler
 
          ImageView circleImageView;
          TextView countryName;
+         CardView countryCard;
+
+
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             circleImageView = itemView.findViewById(R.id.country_image);
             countryName = itemView.findViewById(R.id.country_name);
+            countryCard = itemView.findViewById(R.id.countryCard);
+
 
         }
     }

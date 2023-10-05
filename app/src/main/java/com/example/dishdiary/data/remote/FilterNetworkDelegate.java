@@ -9,4 +9,5 @@ public interface FilterNetworkDelegate {
     //Delegates for the filter search
     void onFilterSuccess(List<MealsItemDTO> meals);
     void onFilterFailure(String errorMsg);
+    void onGetMealByIdSuccess(List<MealsItemDTO> mealsItemDTOList);
 }
