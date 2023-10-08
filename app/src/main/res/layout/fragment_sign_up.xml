@@ -150,17 +150,18 @@
                 android:id="@+id/register_btn"
                 style="@style/button_style"
                 android:layout_width="wrap_content"
-
+                android:background="@drawable/corner_shape"
                 android:layout_height="wrap_content"
-                android:paddingStart="120dp"
-                android:paddingEnd="120dp"
+                android:paddingStart="110dp"
+                android:paddingEnd="110dp"
                 android:text="@string/register"
                 android:textAlignment="center"
-                android:textSize="18sp"
-                app:layout_constraintBottom_toBottomOf="parent"                app:layout_constraintEnd_toEndOf="parent"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.489"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/password_edit_text" />
-
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline2"
