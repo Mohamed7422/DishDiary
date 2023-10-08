@@ -12,7 +12,8 @@
         >
         <action
             android:id="@+id/action_homeFragment_to_searchFragment2"
-            app:destination="@id/searchFragment" />
+            app:destination="@id/searchFragment"
+            app:popUpToInclusive="false" />
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
@@ -21,7 +22,8 @@
         tools:layout="@layout/fragment_search" >
         <action
             android:id="@+id/action_searchFragment_to_favouriteMealsFragment"
-            app:destination="@id/favouriteMealsFragment" />
+            app:destination="@id/favouriteMealsFragment"
+            app:popUpTo="@id/homeFragment" />
     </fragment>
     <fragment
         android:id="@+id/favouriteMealsFragment"
@@ -30,7 +32,8 @@
         tools:layout="@layout/fragment_favourite_meals" >
         <action
             android:id="@+id/action_favouriteMealsFragment_to_weaklyPlanFragment"
-            app:destination="@id/weaklyPlanFragment" />
+            app:destination="@id/weaklyPlanFragment"
+            app:popUpTo="@id/homeFragment" />
     </fragment>
     <fragment
         android:id="@+id/weaklyPlanFragment"
@@ -39,7 +42,8 @@
         tools:layout="@layout/fragment_weakly_plan" >
         <action
             android:id="@+id/action_weaklyPlanFragment_to_profileFragment"
-            app:destination="@id/profileFragment" />
+            app:destination="@id/profileFragment"
+            app:popUpTo="@id/homeFragment" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
@@ -48,7 +52,8 @@
         tools:layout="@layout/fragment_profile" >
         <action
             android:id="@+id/action_profileFragment_to_favouriteMealsFragment"
-            app:destination="@id/favouriteMealsFragment" />
+            app:destination="@id/favouriteMealsFragment"
+            app:popUpTo="@id/homeFragment" />
         <action
             android:id="@+id/action_profileFragment_to_weaklyPlanFragment"
             app:destination="@id/weaklyPlanFragment" />

@@ -38,7 +38,7 @@ public class FavouriteMealsFragment extends Fragment implements IFavouriteMeals
      Favourite_recycler_adapter adapter;
      List<MealsItemDTO> favouriteMeals;
      IPresenter presenter;
-     TextView signInRequiredBtn;
+     TextView signInRequiredBtn,noItemFound;
 
 
 
@@ -60,17 +60,23 @@ public class FavouriteMealsFragment extends Fragment implements IFavouriteMeals
         View view = inflater.inflate(R.layout.fragment_favourite_meals, container, false);
         initViews(view);
 
+
         presenter = new Presenter(RepoImpl.getInstance(Api_Manager.getInstance(), LocalDataBaseImpl.getInstance(requireContext()),
                 AuthSharedPref.getInstance(requireContext()), FireBaseManager.getInstance()),this);
         presenter.getFavouriteMeals();
         if (FirebaseAuth.getInstance().getCurrentUser()!=null){
              if (!mealsListRetrievedInd){
+
                  presenter.downloadMeals(FirebaseAuth.getInstance().getCurrentUser().getEmail());
                    mealsListRetrievedInd = true;
              }
-        }else {
+
+        } else {
             //show Text of Sign up required
+
             signInRequiredBtn.setVisibility(View.VISIBLE);
+            noItemFound.setVisibility(View.GONE);
+
         }
 
         return view;
@@ -85,13 +91,21 @@ public class FavouriteMealsFragment extends Fragment implements IFavouriteMeals
         favouriteMealsRecyclerView.setLayoutManager(layoutManager);
         favouriteMealsRecyclerView.setAdapter(adapter);
         signInRequiredBtn = view.findViewById(R.id.signInRequiredBtn);
+        noItemFound = view.findViewById(R.id.noItemFound);
     }
 
     @Override
     public void getFavouriteMeals(LiveData<List<MealsItemDTO>> favouriteMeals) {
               favouriteMeals.observe(this, mealsItemDTOList -> {
-                    adapter.setFavouriteItemsList(mealsItemDTOList);
-                  System.out.println("mealsItemDTOList "+mealsItemDTOList.size());
+                  //handle no item found
+                  if (!mealsItemDTOList.isEmpty()){
+                      noItemFound.setVisibility(View.GONE);
+                      adapter.setFavouriteItemsList(mealsItemDTOList);
+                      System.out.println("mealsItemDTOList "+mealsItemDTOList.size());
+                  }else {
+                      noItemFound.setVisibility(View.VISIBLE);
+                      adapter.setFavouriteItemsList(mealsItemDTOList);
+                  }
 
               });
     }
