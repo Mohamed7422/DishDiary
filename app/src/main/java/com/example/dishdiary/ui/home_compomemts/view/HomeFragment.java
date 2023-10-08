@@ -36,6 +36,7 @@ import com.example.dishdiary.ui.meal_details_components.view.MealDetailActivity;
 import com.example.dishdiary.ui.home_compomemts.presenter.HomePresenter;
 import com.example.dishdiary.ui.home_compomemts.presenter.IHomePresenter;
 import com.facebook.shimmer.ShimmerFrameLayout;
+import com.google.android.material.progressindicator.LinearProgressIndicator;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -58,10 +59,12 @@ public class HomeFragment extends Fragment  implements IHomeFragment , CategoryR
 
     ImageView dailyMealImg;
     TextView dailyMealName;
+    TextView daily_meal,category,country;
     ImageView addToFavouriteBtn;
     ImageView no_connection_img;
 
     CardView cardDailyItem;
+
 
 
      IHomePresenter homePresenter;
@@ -112,6 +115,10 @@ public class HomeFragment extends Fragment  implements IHomeFragment , CategoryR
         cardDailyItem = view.findViewById(R.id.card_daily_item);
         shimmerFrameLayout = view.findViewById(R.id.skeltonLayout);
         no_connection_img = view.findViewById(R.id.no_connection_img);
+        daily_meal = view.findViewById(R.id.daily_meal);
+        category = view.findViewById(R.id.category);
+        country = view.findViewById(R.id.country);
+
 
         //Recycler Initiation
 
@@ -137,6 +144,9 @@ public class HomeFragment extends Fragment  implements IHomeFragment , CategoryR
 
     @Override
     public void getDailyMeal(MealsItemDTO mealsItemDTO) {
+
+        no_connection_img.setVisibility(View.GONE);
+        appendViews();
 
         Log.i(TAG,"Daily Meal " + mealsItemDTO.getStrArea());
         shimmerFrameLayout.setVisibility(View.GONE);
@@ -204,18 +214,14 @@ public class HomeFragment extends Fragment  implements IHomeFragment , CategoryR
                });
         }
 
-
-
-
-
-
-
     }
 
 
 
     @Override
     public void getCategoriesList(List<CategoryDTO> categories) {
+        no_connection_img.setVisibility(View.GONE);
+        appendViews();
         Log.i(TAG,"categories " + categories.toString());
         shimmerFrameLayout.setVisibility(View.GONE);
         //send the list to the adapter
@@ -226,6 +232,8 @@ public class HomeFragment extends Fragment  implements IHomeFragment , CategoryR
 
     @Override
     public void getCountriesList(List<CountryDTO> countries) {
+        no_connection_img.setVisibility(View.GONE);
+        appendViews();
         shimmerFrameLayout.setVisibility(View.GONE);
         Log.i(TAG,"countries " + countries.get(0).getStrArea().toString());
 
@@ -236,10 +244,25 @@ public class HomeFragment extends Fragment  implements IHomeFragment , CategoryR
     @Override
     public void appendConnectionError(String errorMessage) {
         Log.i(TAG,"error " + errorMessage);
+        hideViews();
+        no_connection_img.setVisibility(View.VISIBLE);
+    }
+
+    private void hideViews() {
         cardDailyItem.setVisibility(View.GONE);
         categoryRecyclerView.setVisibility(View.GONE);
         countryRecyclerView.setVisibility(View.GONE);
-        no_connection_img.setVisibility(View.VISIBLE);
+        daily_meal.setVisibility(View.GONE);
+        category.setVisibility(View.GONE);
+        country.setVisibility(View.GONE);
+    }
+    private void appendViews() {
+        cardDailyItem.setVisibility(View.VISIBLE);
+        categoryRecyclerView.setVisibility(View.VISIBLE);
+        countryRecyclerView.setVisibility(View.VISIBLE);
+        daily_meal.setVisibility(View.VISIBLE);
+        category.setVisibility(View.VISIBLE);
+        country.setVisibility(View.VISIBLE);
     }
 
     @Override

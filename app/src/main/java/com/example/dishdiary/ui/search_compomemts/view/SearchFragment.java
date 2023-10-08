@@ -286,7 +286,7 @@ public class SearchFragment extends Fragment implements ISearchFragment, SearchR
 
     @Override
     public void appendErrorMsg(String msg) {
-        Toast.makeText(getContext(), msg, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), "Check Your Internet Connection!", Toast.LENGTH_SHORT).show();
     }
 
     @Override

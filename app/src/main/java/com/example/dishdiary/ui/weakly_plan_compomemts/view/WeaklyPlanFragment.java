@@ -47,7 +47,7 @@ public class WeaklyPlanFragment extends Fragment implements IWeakPlan, WeakDaysR
     WeakDaysRecyclerAdapter daysAdapter;
     WeakDishesRecyclerAdapter dishesAdapter;
     GridLayoutManager layoutManager;
-    TextView signInRequiredPlanBtn;
+    TextView signInRequiredPlanBtn,weakTitle;
 
     public static boolean mealsPlanListRetrievedInd = false;
 
@@ -88,6 +88,7 @@ public class WeaklyPlanFragment extends Fragment implements IWeakPlan, WeakDaysR
             //show msg
             signInRequiredPlanBtn.setVisibility(View.VISIBLE);
             daysRecyclerView.setVisibility(View.GONE);
+            weakTitle.setVisibility(View.GONE);
         }
 
 
@@ -98,6 +99,7 @@ public class WeaklyPlanFragment extends Fragment implements IWeakPlan, WeakDaysR
     private void initView(View view) {
         daysRecyclerView = view.findViewById(R.id.weakDaysRV);
         dishesRecyclerView = view.findViewById(R.id.weakDishesRV);
+        weakTitle = view.findViewById(R.id.weakTitle);
         daysAdapter = new WeakDaysRecyclerAdapter(getContext(),days,this);
         daysRecyclerView.setAdapter(daysAdapter);
         dishesAdapter = new WeakDishesRecyclerAdapter(getContext(),mealPlanList,this,this);
