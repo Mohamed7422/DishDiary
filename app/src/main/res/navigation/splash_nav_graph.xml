@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/splashFragment"
-        android:name="com.example.dishdiary.ui.SplashFragment"
+        android:name="com.example.dishdiary.ui.splash_components.view.SplashFragment"
         android:label="fragment_splash"
         tools:layout="@layout/fragment_splash" >
         <action
@@ -19,16 +19,33 @@
     </fragment>
     <fragment
         android:id="@+id/logInFragment"
-        android:name="com.example.dishdiary.ui.log_in_compomemts.LogInFragment"
-        android:label="fragment_log_in"
-        tools:layout="@layout/fragment_log_in" >
+        android:name="com.example.dishdiary.ui.log_in_compomemts.view.LogInFragment"
+        android:label="@string/log_in"
+        tools:layout="@layout/fragment_log_in">
         <action
             android:id="@+id/action_logInFragment_to_signUpFragment"
             app:destination="@id/signUpFragment" />
+        <action
+            android:id="@+id/action_logInFragment_to_forgetPasswordFragment"
+            app:destination="@id/forgetPasswordFragment" />
     </fragment>
     <fragment
         android:id="@+id/signUpFragment"
-        android:name="com.example.dishdiary.ui.signup_compomemts.SignUpFragment"
+        android:name="com.example.dishdiary.ui.signup_compomemts.view.SignUpFragment"
         android:label="fragment_sign_up"
-        tools:layout="@layout/fragment_sign_up" />
+        tools:layout="@layout/fragment_sign_up" >
+        <action
+            android:id="@+id/action_signUpFragment_to_logInFragment"
+            app:popUpTo="@id/logInFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/forgetPasswordFragment"
+        android:name="com.example.dishdiary.ui.forgetpassword_components.ForgetPasswordFragment"
+        android:label="Reset Password"
+        tools:layout="@layout/fragment_forget_password" >
+        <action
+            android:id="@+id/action_forgetPasswordFragment_to_logInFragment"
+            app:popUpTo="@id/logInFragment" />
+    </fragment>
 </navigation>

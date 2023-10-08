@@ -1,10 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+
+<ScrollView
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.log_in_compomemts.LogInFragment">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.log_in_compomemts.view.LogInFragment"
+    >
+
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+   >
 
 
     <ImageView
@@ -13,7 +22,7 @@
         android:layout_height="0dp"
         android:src="@drawable/food_dish_ic"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent="0.4"
+        app:layout_constraintHeight_percent="0.3"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
 
@@ -43,11 +52,12 @@
         app:layout_constraintTop_toBottomOf="@id/log_in_tv" />
 
 
-    <EditText
+    <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/email_edit_text"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:ems="10"
+
         android:inputType="textEmailAddress"
         app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
         app:layout_constraintStart_toStartOf="@id/guidelineStart"
@@ -89,11 +99,8 @@
         android:id="@+id/Log_In_Btn"
         style="@style/button_style"
         android:layout_width="wrap_content"
-
         android:layout_height="wrap_content"
-        android:backgroundTint="#E9BF13"
-        android:paddingStart="120dp"
-        android:paddingEnd="120dp"
+
         android:text="@string/log_in"
         android:textColor="@color/black"
         android:textSize="25sp"
@@ -101,13 +108,29 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/forget_password_tv" />
+    <Button
+        android:id="@+id/gmailBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:text="@string/gmail"
+        android:textSize="18sp"
+        android:backgroundTint="@color/red"
+         android:drawableLeft="@drawable/baseline_email"
+         app:layout_constraintTop_toBottomOf="@id/Log_In_Btn"
+        app:layout_constraintEnd_toEndOf="@id/Log_In_Btn"
+        app:layout_constraintStart_toStartOf="@id/Log_In_Btn"
+        />
+
+
 
     <TextView
         android:id="@+id/Dont_have_account_Tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/don_t_have_account"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="50dp"
+        app:layout_constraintBottom_toTopOf="@id/continueAsGuest"
         app:layout_constraintEnd_toStartOf="@+id/create_new_account"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintHorizontal_chainStyle="packed"
@@ -127,6 +150,31 @@
 
         />
 
+    <TextView
+        android:id="@+id/continueAsGuest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/continue_as_a_guest"
+        android:textColor="@color/yellow_dark_bg_color"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintStart_toStartOf="@id/guidelineStart"
+        app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+        app:layout_constraintHorizontal_bias="0.5"
+          app:layout_constraintBottom_toBottomOf="parent"
+        />
+
+    <ProgressBar
+        android:id="@+id/login_progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:backgroundTint="@color/yellow_bg_color"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineStart"
         android:layout_width="wrap_content"
@@ -142,4 +190,8 @@
         app:layout_constraintGuide_percent="0.9294404" />
 
 
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

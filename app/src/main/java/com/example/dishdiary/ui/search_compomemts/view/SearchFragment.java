@@ -20,11 +20,13 @@ import com.example.dishdiary.R;
 import com.example.dishdiary.data.Repository.Repo;
 import com.example.dishdiary.data.Repository.RepoImpl;
 import com.example.dishdiary.data.local.LocalDataBaseImpl;
+import com.example.dishdiary.data.model.authDTO.AuthSharedPref;
 import com.example.dishdiary.data.model.dto.CategoryDTO;
 import com.example.dishdiary.data.model.dto.CountryDTO;
 import com.example.dishdiary.data.model.dto.IngredientDTO;
 import com.example.dishdiary.data.model.dto.MealsItemDTO;
 import com.example.dishdiary.data.remote.Api_Manager;
+import com.example.dishdiary.data.remote.authentication_remote.FireBaseManager;
 import com.example.dishdiary.ui.home_compomemts.view.CountryRecyclerAdapter;
 import com.example.dishdiary.ui.meal_details_components.view.MealDetailActivity;
 import com.example.dishdiary.ui.search_compomemts.presenter.SearchPresenter;
@@ -63,8 +65,6 @@ public class SearchFragment extends Fragment implements ISearchFragment, SearchR
 
     Disposable ingredientSearch,ingredientSearchTwo;
 
-
-
     List<IngredientDTO> searchIngredients = new ArrayList<>();
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -76,8 +76,8 @@ public class SearchFragment extends Fragment implements ISearchFragment, SearchR
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_search, container, false);
-        searchPresenter = new SearchPresenter(RepoImpl.getInstance(Api_Manager.getInstance(), LocalDataBaseImpl.getInstance(getContext())
-                ),this);
+        searchPresenter = new SearchPresenter(RepoImpl.getInstance(Api_Manager.getInstance(), LocalDataBaseImpl.getInstance(requireContext()),
+                AuthSharedPref.getInstance(requireContext()), FireBaseManager.getInstance()),this);
 
         initViews(view);
         setListeners();
@@ -104,7 +104,7 @@ public class SearchFragment extends Fragment implements ISearchFragment, SearchR
                 } else if (state == Constants.COUNTRIES) {
                     mealsRecyclerView.swapAdapter(mealsSearchAdapter,true);
                     searchPresenter.filterByCountry(filter);
-                    mealsRecyclerView.swapAdapter(mealsSearchAdapter,true);
+
 
                 }
             }

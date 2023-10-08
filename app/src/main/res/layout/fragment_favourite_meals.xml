@@ -19,6 +19,21 @@
 
         />
 
+    <TextView
+        android:id="@+id/signInRequiredBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:text="@string/sign_in_required"
+        android:textStyle="bold"
+        android:textSize="30sp"
+        android:fontFamily="@font/alata"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline6"
         android:layout_width="wrap_content"

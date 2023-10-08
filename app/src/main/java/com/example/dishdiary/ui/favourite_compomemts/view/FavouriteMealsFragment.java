@@ -13,24 +13,36 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.dishdiary.R;
 import com.example.dishdiary.data.Repository.RepoImpl;
 import com.example.dishdiary.data.local.LocalDataBaseImpl;
+import com.example.dishdiary.data.model.authDTO.AuthSharedPref;
+import com.example.dishdiary.data.model.authDTO.ISharedPref;
 import com.example.dishdiary.data.model.dto.MealsItemDTO;
 import com.example.dishdiary.data.remote.Api_Manager;
+import com.example.dishdiary.data.remote.authentication_remote.FireBaseManager;
 import com.example.dishdiary.ui.favourite_compomemts.favourite_presenter.IPresenter;
 import com.example.dishdiary.ui.favourite_compomemts.favourite_presenter.Presenter;
 import com.example.dishdiary.ui.meal_details_components.view.MealDetailActivity;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class FavouriteMealsFragment extends Fragment implements IFavouriteMeals , Favourite_recycler_adapter.OnFavouriteItemClickListener {
+public class FavouriteMealsFragment extends Fragment implements IFavouriteMeals
+        , Favourite_recycler_adapter.OnFavouriteItemClickListener,
+        Favourite_recycler_adapter.OnDeleterFavMealClickListener {
      RecyclerView favouriteMealsRecyclerView;
      Favourite_recycler_adapter adapter;
      List<MealsItemDTO> favouriteMeals;
      IPresenter presenter;
+     TextView signInRequiredBtn;
+
+
+
+    public static boolean mealsListRetrievedInd = false;
 
     public FavouriteMealsFragment() {
     }
@@ -48,8 +60,18 @@ public class FavouriteMealsFragment extends Fragment implements IFavouriteMeals 
         View view = inflater.inflate(R.layout.fragment_favourite_meals, container, false);
         initViews(view);
 
-        presenter = new Presenter(RepoImpl.getInstance(Api_Manager.getInstance(), LocalDataBaseImpl.getInstance(requireContext())),this);
+        presenter = new Presenter(RepoImpl.getInstance(Api_Manager.getInstance(), LocalDataBaseImpl.getInstance(requireContext()),
+                AuthSharedPref.getInstance(requireContext()), FireBaseManager.getInstance()),this);
         presenter.getFavouriteMeals();
+        if (FirebaseAuth.getInstance().getCurrentUser()!=null){
+             if (!mealsListRetrievedInd){
+                 presenter.downloadMeals(FirebaseAuth.getInstance().getCurrentUser().getEmail());
+                   mealsListRetrievedInd = true;
+             }
+        }else {
+            //show Text of Sign up required
+            signInRequiredBtn.setVisibility(View.VISIBLE);
+        }
 
         return view;
     }
@@ -57,11 +79,12 @@ public class FavouriteMealsFragment extends Fragment implements IFavouriteMeals 
     private void initViews(View view) {
         favouriteMeals = new ArrayList<>();
         favouriteMealsRecyclerView = view.findViewById(R.id.favourite_meals_RV);
-        adapter = new Favourite_recycler_adapter(getContext(),favouriteMeals,this);
+        adapter = new Favourite_recycler_adapter(getContext(),favouriteMeals,this,this);
         GridLayoutManager layoutManager = new GridLayoutManager(getContext(),2);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         favouriteMealsRecyclerView.setLayoutManager(layoutManager);
         favouriteMealsRecyclerView.setAdapter(adapter);
+        signInRequiredBtn = view.findViewById(R.id.signInRequiredBtn);
     }
 
     @Override
@@ -79,5 +102,10 @@ public class FavouriteMealsFragment extends Fragment implements IFavouriteMeals 
         Intent intent = new Intent(getActivity(), MealDetailActivity.class);
         intent.putExtra("mealItem",mealsItemDTO);
         startActivity(intent);
+    }
+
+    @Override
+    public void onDeleteMealClick(MealsItemDTO mealsItemDTO) {
+        presenter.deleteFromFavMeals(mealsItemDTO);
     }
 }

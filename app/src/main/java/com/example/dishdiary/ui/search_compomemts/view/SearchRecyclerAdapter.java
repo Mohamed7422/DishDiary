@@ -92,6 +92,7 @@ public class SearchRecyclerAdapter extends RecyclerView.Adapter<SearchRecyclerAd
             holder.itemName.setText(mealsItemDTO.getMealName());
             Glide.with(context)
                     .load(mealsItemDTO.getStrMealThumb())
+
                     .placeholder(R.drawable.baseline_image)
                     .error(R.drawable.baseline_broken_image)
                     .into(holder.itemImg);

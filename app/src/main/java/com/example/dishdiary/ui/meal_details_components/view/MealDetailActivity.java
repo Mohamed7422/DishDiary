@@ -1,12 +1,14 @@
 package com.example.dishdiary.ui.meal_details_components.view;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -15,17 +17,24 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.dishdiary.MainActivity;
 import com.example.dishdiary.R;
 import com.example.dishdiary.data.Repository.Repo;
 import com.example.dishdiary.data.Repository.RepoImpl;
 import com.example.dishdiary.data.local.LocalDataBaseImpl;
+import com.example.dishdiary.data.model.authDTO.AuthSharedPref;
 import com.example.dishdiary.data.model.dto.IngredientDTO;
 import com.example.dishdiary.data.model.dto.MealPlanDTO;
 import com.example.dishdiary.data.model.dto.MealsItemDTO;
 import com.example.dishdiary.data.remote.Api_Manager;
 import com.example.dishdiary.data.remote.RemoteSource;
+import com.example.dishdiary.data.remote.authentication_remote.FireBaseManager;
+import com.example.dishdiary.ui.SplashActivity;
+import com.example.dishdiary.ui.log_in_compomemts.view.LogInFragment;
 import com.example.dishdiary.ui.meal_details_components.presenter.IMealDetailsPresenter;
 import com.example.dishdiary.ui.meal_details_components.presenter.MealsDetailsPresenter;
+import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.auth.FirebaseAuth;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView;
@@ -52,6 +61,8 @@ public class MealDetailActivity extends AppCompatActivity {
     MealPlanDTO mealPlanDTO;
     IMealDetailsPresenter mealDetailsPresenter;
     private int selectedItemIndex = 0;
+    public static boolean mealDetailIndicator = false;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +70,10 @@ public class MealDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_meal_detail);
         MealsItemDTO mealItem = getIntent().getParcelableExtra("mealItem");
         mealItemDto = mealItem;
+
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setHomeAsUpIndicator(R.drawable.baseline_arrow_back);
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
         initViews();
         mealPlanDTO = new MealPlanDTO(
@@ -97,33 +112,71 @@ public class MealDetailActivity extends AppCompatActivity {
         }
 
         // Handling add Meal to favourite
-        addMealToFavouriteBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //add the item to the database
-                if (!clicked) {
-                    mealDetailsPresenter.addMealToFavourite(mealItemDto);
-                    addMealToFavouriteBtn.setImageResource(R.drawable.baseline_favorite);
-                    Toast.makeText(getApplicationContext(), "Added To favourite", Toast.LENGTH_SHORT).show();
-                    clicked = true;
-                } else {
-                    mealDetailsPresenter.removeMealFromFavourite(mealItemDto);
-                    addMealToFavouriteBtn.setImageResource(R.drawable.baseline_favorite_border);
-                    Toast.makeText(getApplicationContext(), "Removed From favourite", Toast.LENGTH_SHORT).show();
-                    clicked = false;
-                }
 
+        if (FirebaseAuth.getInstance().getCurrentUser() != null){
+
+            if (!mealDetailIndicator){
+                addMealToFavouriteBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        //add the item to the database
+                        if (!clicked) {
+                            mealDetailsPresenter.addMealToFavourite(mealItemDto);
+                            addMealToFavouriteBtn.setImageResource(R.drawable.baseline_favorite);
+                            Toast.makeText(getApplicationContext(), "Added To favourite", Toast.LENGTH_SHORT).show();
+                            clicked = true;
+                        } else {
+                            mealDetailsPresenter.removeMealFromFavourite(mealItemDto);
+                            addMealToFavouriteBtn.setImageResource(R.drawable.baseline_favorite_border);
+                            Toast.makeText(getApplicationContext(), "Removed From favourite", Toast.LENGTH_SHORT).show();
+                            clicked = false;
+                        }
+
+                    }
+                });
+
+                // Handling add Meal to Calender Plan For Weak
+                addToCalendar.setOnClickListener(view -> {
+
+                    /*TODO-Authentication check whether user a guest or not*/
+                    //append a weak dialog
+                    appendWeakDialog();
+
+                });
+                mealDetailIndicator = true;
             }
-        });
 
-        // Handling add Meal to Calender Plan For Weak
-        addToCalendar.setOnClickListener(view -> {
+        }else {
+            addMealToFavouriteBtn.setOnClickListener(item ->{
+                //Toast.makeText(this, "You have to Sign Up", Toast.LENGTH_SHORT).show();
+                Snackbar snackbar  = Snackbar.make(findViewById(R.id.meals_details_root),"You have to Log In",Snackbar.LENGTH_SHORT);
+                snackbar.setAction(R.string.log_in, new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(MealDetailActivity.this, SplashActivity.class);
+                        startActivity(intent);
+                    }
+                });
 
-            /*TODO-Authentication check whether user a guest or not*/
-            //append a weak dialog
-            appendWeakDialog();
+                snackbar.show();
 
-        });
+            });
+            addToCalendar.setOnClickListener(view -> {
+                Toast.makeText(this, "You have to Sign Up", Toast.LENGTH_SHORT).show();
+
+                Snackbar snackbar  = Snackbar.make(findViewById(R.id.meals_details_root),"You have to Log In",Snackbar.LENGTH_SHORT);
+                snackbar.setAction(R.string.log_in, new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(MealDetailActivity.this, SplashActivity.class);
+                        startActivity(intent);
+                    }
+                });
+
+                snackbar.show();
+            });
+        }
+
 
     }
 
@@ -242,7 +295,8 @@ public class MealDetailActivity extends AppCompatActivity {
         ingredientItemRV.setLayoutManager(layoutManager);
 
 
-        mealDetailsPresenter = new MealsDetailsPresenter(RepoImpl.getInstance(Api_Manager.getInstance(), LocalDataBaseImpl.getInstance(this)));
+        mealDetailsPresenter = new MealsDetailsPresenter(RepoImpl.getInstance(Api_Manager.getInstance(), LocalDataBaseImpl.getInstance(getApplicationContext()),
+                AuthSharedPref.getInstance(getApplicationContext()), FireBaseManager.getInstance()));
 
     }
 
