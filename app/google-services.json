@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "140801192945",
+    "project_id": "dishdiary-a1c4f",
+    "storage_bucket": "dishdiary-a1c4f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:140801192945:android:2afaaf0cd9ace570918a50",
+        "android_client_info": {
+          "package_name": "com.example.dishdiary"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "140801192945-4ealcgm2oesskn9tltk7bqi2me7fc7n7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.dishdiary",
+            "certificate_hash": "875e6679e2b3022ded7302672bacfa51fd697c76"
+          }
+        },
+        {
+          "client_id": "140801192945-768n6ob3icj7q13r07a6d0ab1nbshhrg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAOG8wr7vvQLF-JZcAfsfRiaJQLrFurjc0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "140801192945-768n6ob3icj7q13r07a6d0ab1nbshhrg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

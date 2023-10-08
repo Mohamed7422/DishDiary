@@ -13,7 +13,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.dishdiary.R;
+import com.example.dishdiary.data.model.dto.MealPlanDTO;
 import com.example.dishdiary.data.model.dto.MealsItemDTO;
+import com.example.dishdiary.ui.weakly_plan_compomemts.view.WeakDishesRecyclerAdapter;
 
 import java.util.List;
 
@@ -22,14 +24,17 @@ public class Favourite_recycler_adapter extends RecyclerView.Adapter<Favourite_r
     private Context context;
     private List<MealsItemDTO> mealsList;
     OnFavouriteItemClickListener onFavouriteItemClickListener;
+    OnDeleterFavMealClickListener onDeleterFavMealClickListener;
 
 
 
 
-    public Favourite_recycler_adapter(Context _context,List<MealsItemDTO> mealsList ,OnFavouriteItemClickListener onFavouriteItemClickListener ){
+    public Favourite_recycler_adapter(Context _context,List<MealsItemDTO> mealsList ,OnFavouriteItemClickListener onFavouriteItemClickListener,
+                                      OnDeleterFavMealClickListener onDeleterFavMealClickListener){
         this.context = _context;
         this.onFavouriteItemClickListener = onFavouriteItemClickListener;
         this.mealsList = mealsList;
+        this.onDeleterFavMealClickListener = onDeleterFavMealClickListener;
 
     }
 
@@ -37,6 +42,10 @@ public class Favourite_recycler_adapter extends RecyclerView.Adapter<Favourite_r
         this.mealsList = mealsList;
         this.notifyDataSetChanged();
 
+    }
+
+    public interface OnDeleterFavMealClickListener{
+        void onDeleteMealClick(MealsItemDTO mealsItemDTO);
     }
 
     @NonNull
@@ -60,6 +69,12 @@ public class Favourite_recycler_adapter extends RecyclerView.Adapter<Favourite_r
 
         holder.favouriteCardView.setOnClickListener(item ->
                 onFavouriteItemClickListener.onFavouriteItemClick(mealItem));
+
+        holder.deleteBtn.setOnClickListener( item -> {
+            onDeleterFavMealClickListener.onDeleteMealClick(mealItem);
+        });
+
+
     }
 
     @Override
@@ -76,12 +91,14 @@ public class Favourite_recycler_adapter extends RecyclerView.Adapter<Favourite_r
         private CardView favouriteCardView;
         private ImageView favouriteImage;
         private TextView favouriteTV;
+        private ImageView deleteBtn;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             favouriteCardView = itemView.findViewById(R.id.favourite_card_view);
             favouriteImage = itemView.findViewById(R.id.meal_image_item);
             favouriteTV = itemView.findViewById(R.id.meal_item_name);
+            deleteBtn =itemView.findViewById(R.id.fav_deleteBtn);
 
         }
     }

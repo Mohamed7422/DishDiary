@@ -9,6 +9,8 @@ import java.util.List;
 public interface IWeakPlanPresenter {
 
     LiveData<List<MealPlanDTO>> getMealsByDay(String day);
+    void downloadPlanMeals(String userEmail);
+    void deleteFromPlanMeals(MealPlanDTO mealPlanDTO);
 
 
 }

@@ -1,6 +1,7 @@
 package com.example.dishdiary.ui.home_compomemts.view;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -24,13 +25,19 @@ import com.example.dishdiary.Constants;
 import com.example.dishdiary.R;
 import com.example.dishdiary.data.Repository.RepoImpl;
 import com.example.dishdiary.data.local.LocalDataBaseImpl;
+import com.example.dishdiary.data.model.authDTO.AuthSharedPref;
 import com.example.dishdiary.data.model.dto.CategoryDTO;
 import com.example.dishdiary.data.model.dto.CountryDTO;
 import com.example.dishdiary.data.model.dto.MealsItemDTO;
 import com.example.dishdiary.data.remote.Api_Manager;
+import com.example.dishdiary.data.remote.authentication_remote.FireBaseManager;
+import com.example.dishdiary.ui.SplashActivity;
 import com.example.dishdiary.ui.meal_details_components.view.MealDetailActivity;
 import com.example.dishdiary.ui.home_compomemts.presenter.HomePresenter;
 import com.example.dishdiary.ui.home_compomemts.presenter.IHomePresenter;
+import com.facebook.shimmer.ShimmerFrameLayout;
+import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.auth.FirebaseAuth;
 
 
 import java.util.ArrayList;
@@ -47,15 +54,18 @@ public class HomeFragment extends Fragment  implements IHomeFragment , CategoryR
     CountryRecyclerAdapter countryRecyclerAdapter;
     LinearLayoutManager categoryLayoutManager;
     LinearLayoutManager countryLayoutManager;
+    ShimmerFrameLayout shimmerFrameLayout;
 
     ImageView dailyMealImg;
     TextView dailyMealName;
     ImageView addToFavouriteBtn;
+    ImageView no_connection_img;
 
     CardView cardDailyItem;
 
 
      IHomePresenter homePresenter;
+    public static boolean dailyMealIndicator = false;
 
     boolean clicked = false;
 
@@ -71,8 +81,11 @@ public class HomeFragment extends Fragment  implements IHomeFragment , CategoryR
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        homePresenter = new HomePresenter(RepoImpl.getInstance(Api_Manager.getInstance(),
-                LocalDataBaseImpl.getInstance(getContext())),this);
+
+        getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
+        homePresenter = new HomePresenter(RepoImpl.getInstance(Api_Manager.getInstance(), LocalDataBaseImpl.getInstance(requireContext()),
+                AuthSharedPref.getInstance(requireContext()), FireBaseManager.getInstance()),this);
 
 
         homePresenter.getDailyMeal();
@@ -81,8 +94,6 @@ public class HomeFragment extends Fragment  implements IHomeFragment , CategoryR
 
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         initViews(view);
-
-
 
         return view;
     }
@@ -99,6 +110,8 @@ public class HomeFragment extends Fragment  implements IHomeFragment , CategoryR
         categoryRecyclerView = view.findViewById(R.id.category_RV);
 
         cardDailyItem = view.findViewById(R.id.card_daily_item);
+        shimmerFrameLayout = view.findViewById(R.id.skeltonLayout);
+        no_connection_img = view.findViewById(R.id.no_connection_img);
 
         //Recycler Initiation
 
@@ -126,47 +139,75 @@ public class HomeFragment extends Fragment  implements IHomeFragment , CategoryR
     public void getDailyMeal(MealsItemDTO mealsItemDTO) {
 
         Log.i(TAG,"Daily Meal " + mealsItemDTO.getStrArea());
+        shimmerFrameLayout.setVisibility(View.GONE);
 
-         dailyMealName.setText(mealsItemDTO.getMealName());
-         Glide.with(this)
-                .load(mealsItemDTO.getStrMealThumb())
-                .placeholder(R.drawable.ic_launcher_foreground)
-                .error(R.drawable.ic_launcher_foreground)
-                .into(dailyMealImg);
+            dailyMealName.setText(mealsItemDTO.getMealName());
+            Glide.with(this)
+                    .load(mealsItemDTO.getStrMealThumb())
+                    .placeholder(R.drawable.ic_launcher_foreground)
+                    .error(R.drawable.ic_launcher_foreground)
+                    .into(dailyMealImg);
 
-        cardDailyItem.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-              //open activity Detail
-                //send the object to meal details activity
-                Intent intent = new Intent(getActivity(),MealDetailActivity.class);
-                intent.putExtra("mealItem",mealsItemDTO);
-                startActivity(intent);
-            }
-        });
-
-
-        //implement add to favourite meal button
-        addToFavouriteBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //add the item to the database
-                if (!clicked){
-                    homePresenter.insertMeal(mealsItemDTO);
-                    addToFavouriteBtn.setImageResource(R.drawable.baseline_favorite);
-                    Toast.makeText(requireContext(),"Added To favourite",Toast.LENGTH_SHORT).show();
-                    clicked = true;
-                }else {
-                    homePresenter.deleteMeal(mealsItemDTO);
-                    addToFavouriteBtn.setImageResource(R.drawable.baseline_favorite_border);
-                    Toast.makeText(requireContext(),"Removed From favourite",Toast.LENGTH_SHORT).show();
-                   clicked = false;
+            cardDailyItem.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //open activity Detail
+                    //send the object to meal details activity
+                    Intent intent = new Intent(getActivity(),MealDetailActivity.class);
+                    intent.putExtra("mealItem",mealsItemDTO);
+                    startActivity(intent);
                 }
+            });
 
+
+            //implement add to favourite meal button
+        if (FirebaseAuth.getInstance().getCurrentUser() != null){
+            if (!dailyMealIndicator){
+                addToFavouriteBtn.setOnClickListener(new View.OnClickListener() {
+
+                    @Override
+                    public void onClick(View v) {
+                        //add the item to the database
+
+                        if (!clicked){
+                            homePresenter.insertMeal(mealsItemDTO);
+                            addToFavouriteBtn.setImageResource(R.drawable.baseline_favorite);
+                            Toast.makeText(requireContext(),"Added To favourite",Toast.LENGTH_SHORT).show();
+                            clicked = true;
+                        }else {
+                            homePresenter.deleteMeal(mealsItemDTO);
+                            addToFavouriteBtn.setImageResource(R.drawable.baseline_favorite_border);
+                            Toast.makeText(requireContext(),"Removed From favourite",Toast.LENGTH_SHORT).show();
+                            clicked = false;
+                        }
+
+
+
+                    }
+                });
+                dailyMealIndicator =true;
             }
-        });
 
-      
+
+        }else {
+               addToFavouriteBtn.setOnClickListener(item ->{
+                   Snackbar snackbar  = Snackbar.make(getView(),"You have to Log In",Snackbar.LENGTH_SHORT);
+                   snackbar.setAction(R.string.log_in, new View.OnClickListener() {
+                       @Override
+                       public void onClick(View v) {
+                           Intent intent = new Intent(getActivity(), SplashActivity.class);
+                           startActivity(intent);
+                       }
+                   });
+
+                   snackbar.show();
+               });
+        }
+
+
+
+
+
 
 
     }
@@ -176,6 +217,7 @@ public class HomeFragment extends Fragment  implements IHomeFragment , CategoryR
     @Override
     public void getCategoriesList(List<CategoryDTO> categories) {
         Log.i(TAG,"categories " + categories.toString());
+        shimmerFrameLayout.setVisibility(View.GONE);
         //send the list to the adapter
         categoryRecyclerAdapter.setCategoriesList(categories);
         categoryRecyclerView.setAdapter(categoryRecyclerAdapter);
@@ -184,6 +226,7 @@ public class HomeFragment extends Fragment  implements IHomeFragment , CategoryR
 
     @Override
     public void getCountriesList(List<CountryDTO> countries) {
+        shimmerFrameLayout.setVisibility(View.GONE);
         Log.i(TAG,"countries " + countries.get(0).getStrArea().toString());
 
         countryRecyclerAdapter.setCountriesList(countries);
@@ -193,6 +236,10 @@ public class HomeFragment extends Fragment  implements IHomeFragment , CategoryR
     @Override
     public void appendConnectionError(String errorMessage) {
         Log.i(TAG,"error " + errorMessage);
+        cardDailyItem.setVisibility(View.GONE);
+        categoryRecyclerView.setVisibility(View.GONE);
+        countryRecyclerView.setVisibility(View.GONE);
+        no_connection_img.setVisibility(View.VISIBLE);
     }
 
     @Override

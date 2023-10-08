@@ -1,5 +1,7 @@
 plugins {
     id("com.android.application")
+    id("com.google.gms.google-services")
+    id ("androidx.navigation.safeargs")
 }
 
 android {
@@ -69,6 +71,23 @@ dependencies {
 
     //video player for youtube
     implementation ("com.pierfrancescosoffritti.androidyoutubeplayer:core:12.1.0")
+
+
+    // Import the Firebase BoM
+    implementation(platform("com.google.firebase:firebase-bom:32.3.1"))
+
+
+    // TODO: Add the dependencies for Firebase products you want to use
+    // When using the BoM, don't specify versions in Firebase dependencies
+    implementation("com.google.firebase:firebase-analytics")
+     // When using the BoM, you don't specify versions in Firebase library dependencies
+    implementation("com.google.firebase:firebase-auth:22.1.2")
+    implementation("com.google.android.gms:play-services-auth:20.7.0")
+    implementation("com.google.firebase:firebase-firestore")
+
+    //apply shimmer layout
+    implementation ("com.facebook.shimmer:shimmer:0.5.0");
+
 
 
 }

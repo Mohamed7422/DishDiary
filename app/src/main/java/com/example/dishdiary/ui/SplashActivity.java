@@ -20,14 +20,14 @@ import com.example.dishdiary.R;
 
 public class SplashActivity extends AppCompatActivity {
 
-
+    NavController navController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-       setContentView( R.layout.activity_splash);
-       Navigation.findNavController(this,R.id.splash_nav_host);
+        setContentView( R.layout.activity_splash);
+        navController=   Navigation.findNavController(this,R.id.splash_nav_host);
 
 
 

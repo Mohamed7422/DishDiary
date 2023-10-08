@@ -10,11 +10,11 @@
         android:id="@+id/weakTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
+         android:textColor="@color/yellow_bg_color"
         android:text="@string/day_dishes"
         android:layout_margin="10dp"
         android:textSize="30sp"
-        android:background="@drawable/sign_up_background"
+
         android:fontFamily="@font/alata"
 
         app:layout_constraintTop_toTopOf="parent"
@@ -28,8 +28,7 @@
         android:layout_height="wrap_content"
          app:layout_constraintTop_toBottomOf="@id/weakTitle"
         android:padding="10dp"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        android:orientation="horizontal"
+
         android:layout_margin="10dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -40,10 +39,24 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:padding="10dp"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        android:orientation="vertical"
+
         android:layout_margin="10dp"
         app:layout_constraintTop_toBottomOf="@id/weakDaysRV"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/signInRequiredPlanBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:text="@string/sign_in_required"
+        android:textStyle="bold"
+        android:textSize="30sp"
+        android:fontFamily="@font/alata"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

@@ -6,12 +6,14 @@
     android:layout_margin="3dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/dayCard"
+    app:cardCornerRadius="11dp"
+    android:backgroundTint="@color/yellow_bg_color"
     >
     
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/sign_up_background"
+
          >
        
         <TextView
@@ -20,10 +22,11 @@
             android:layout_height="wrap_content"
             android:padding="3dp"
             tools:text="Friday"
-            android:textSize="20sp"
+            android:textColor="@color/black"
+            android:textSize="15sp"
             android:textAlignment="center"
             android:fontFamily="@font/alata"
-           app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             />
 

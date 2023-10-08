@@ -43,7 +43,14 @@
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.example.dishdiary.ui.profile_compomemts.ProfileFragment"
+        android:name="com.example.dishdiary.ui.profile_compomemts.view.ProfileFragment"
         android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_profileFragment_to_favouriteMealsFragment"
+            app:destination="@id/favouriteMealsFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_weaklyPlanFragment"
+            app:destination="@id/weaklyPlanFragment" />
+    </fragment>
 </navigation>

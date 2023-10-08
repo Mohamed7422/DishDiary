@@ -1,10 +1,13 @@
 package com.example.dishdiary.ui.weakly_plan_compomemts.view;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import androidx.annotation.ColorRes;
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
@@ -39,12 +42,14 @@ public class WeakDaysRecyclerAdapter extends RecyclerView.Adapter<WeakDaysRecycl
     }
 
 
+    @SuppressLint("ResourceAsColor")
     @Override
     public void onBindViewHolder(@NonNull WeakDaysRecyclerAdapter.ViewHolder holder, int position) {
         String daySelected = daysList.get(position);
         holder.dayName.setText(daySelected);
 
         holder.dayCardView.setOnClickListener(item ->{
+
          dayItemSelected = holder.getAdapterPosition();
          onDayCardClickListener.onDayCardClick(daysList.get(holder.getAdapterPosition()));
          notifyDataSetChanged();

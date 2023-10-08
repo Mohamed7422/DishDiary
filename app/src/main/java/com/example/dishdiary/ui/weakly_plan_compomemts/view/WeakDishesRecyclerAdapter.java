@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -22,15 +23,21 @@ public class WeakDishesRecyclerAdapter extends RecyclerView.Adapter<WeakDishesRe
     private List<MealPlanDTO> mealPlanList;
 
     private OnWeakDishClickListener onWeakDishClickListener;
+    private OnDeleterMealPlanClickListener onDeleterMealPlanClickListener;
 
-    public WeakDishesRecyclerAdapter(Context _context, List<MealPlanDTO>  mealPlanList ,OnWeakDishClickListener onWeakDishClickListener ){
+    public WeakDishesRecyclerAdapter(Context _context, List<MealPlanDTO>  mealPlanList
+            ,OnWeakDishClickListener onWeakDishClickListener,OnDeleterMealPlanClickListener onDeleterMealPlanClickListener ){
         this.context = _context;
         this.mealPlanList = mealPlanList;
         this.onWeakDishClickListener =onWeakDishClickListener;
+        this.onDeleterMealPlanClickListener =onDeleterMealPlanClickListener;
     }
 
    public interface OnWeakDishClickListener{
       void onWeakDishClick(MealPlanDTO mealPlanDTO);
+   }
+   public interface OnDeleterMealPlanClickListener{
+      void onDeleteMealClick(MealPlanDTO mealPlanDTO);
    }
 
 
@@ -38,7 +45,7 @@ public class WeakDishesRecyclerAdapter extends RecyclerView.Adapter<WeakDishesRe
     @NonNull
     @Override
     public WeakDishesRecyclerAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.favourite_meal_item_layout, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.week_meal_item_layout, parent, false);
         return new WeakDishesRecyclerAdapter.ViewHolder(view);
     }
 
@@ -56,6 +63,10 @@ public class WeakDishesRecyclerAdapter extends RecyclerView.Adapter<WeakDishesRe
 
         holder.mealPlanItem.setOnClickListener(item ->
                 onWeakDishClickListener.onWeakDishClick(mealPlanItem));
+
+        holder.deleteBtn.setOnClickListener(item ->
+                    onDeleterMealPlanClickListener.onDeleteMealClick(mealPlanItem)
+                );
      }
 
     public void setMealPlanList(List<MealPlanDTO> mealPlanList ) {
@@ -77,6 +88,7 @@ public class WeakDishesRecyclerAdapter extends RecyclerView.Adapter<WeakDishesRe
         private CardView mealPlanItem;
         private TextView mealPlanName;
         private ImageView mealImg;
+        private ImageView deleteBtn;
 
 
 
@@ -85,6 +97,7 @@ public class WeakDishesRecyclerAdapter extends RecyclerView.Adapter<WeakDishesRe
             mealPlanItem = itemView.findViewById(R.id.favourite_card_view);
             mealPlanName = itemView.findViewById(R.id.meal_item_name);
             mealImg = itemView.findViewById(R.id.meal_image_item);
+            deleteBtn = itemView.findViewById(R.id.deleteBtn);
 
 
         }

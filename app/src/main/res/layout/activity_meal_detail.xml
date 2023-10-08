@@ -4,13 +4,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent"
+
+    tools:context=".ui.meal_details_components.view.MealDetailActivity"
+    >
 
     <androidx.constraintlayout.widget.ConstraintLayout
 
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.meal_details_components.view.MealDetailActivity">
+        android:id="@+id/meals_details_root"
+       >
 
 
         <androidx.cardview.widget.CardView
