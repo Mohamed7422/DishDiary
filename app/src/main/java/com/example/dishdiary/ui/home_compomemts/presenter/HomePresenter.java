@@ -3,6 +3,9 @@ package com.example.dishdiary.ui.home_compomemts.presenter;
 import androidx.lifecycle.LiveData;
 
 import com.example.dishdiary.data.Repository.Repo;
+import com.example.dishdiary.data.model.CategoriesResponse;
+import com.example.dishdiary.data.model.CountriesResponse;
+import com.example.dishdiary.data.model.MealResponse;
 import com.example.dishdiary.data.model.dto.CategoryDTO;
 import com.example.dishdiary.data.model.dto.CountryDTO;
 import com.example.dishdiary.data.model.dto.IngredientDTO;
@@ -11,6 +14,11 @@ import com.example.dishdiary.data.remote.NetworkDelegate;
 import com.example.dishdiary.ui.home_compomemts.view.IHomeFragment;
 
 import java.util.List;
+
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.core.Scheduler;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class HomePresenter implements IHomePresenter , NetworkDelegate {
 
@@ -23,19 +31,33 @@ public class HomePresenter implements IHomePresenter , NetworkDelegate {
     }
 
     @Override
-    public void getDailyMeal( ) {
-     repo.getDailyMeal(this);
+    public void getDailyMeal() {
+        Observable<MealResponse> dailyMeals = repo.getDailyMeal();
+        dailyMeals.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(mealResponse -> homeFragment.getDailyMeal(mealResponse.getMeals().get(0)));
 
     }
 
     @Override
     public void getCategories( ) {
-     repo.getCategories(this);
+        Observable<CategoriesResponse> categories = repo.getCategories();
+        categories.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(categoriesResponse -> homeFragment.getCategoriesList(categoriesResponse.getCategoryList()));
     }
 
     @Override
     public void getCountries( ) {
-     repo.getCountries(this);
+        Observable<CountriesResponse> countries =    repo.getCountries();
+        countries.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        countriesResponse ->
+                                homeFragment.getCountriesList(countriesResponse.getCountries()),
+                        error ->{
+                            System.out.println(error+"onHomePresenter");
+                        });
     }
 
     @Override
@@ -59,7 +81,7 @@ public class HomePresenter implements IHomePresenter , NetworkDelegate {
     public void onMealCallSuccess(MealsItemDTO dailyMeal) {
         System.out.println("daily Meal"+dailyMeal.getMealName());
         //get Data and send it to the view
-        homeFragment.getDailyMeal(dailyMeal);
+       // homeFragment.getDailyMeal(dailyMeal);
     }
 
     @Override

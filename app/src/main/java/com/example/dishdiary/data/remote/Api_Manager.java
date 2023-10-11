@@ -3,7 +3,7 @@ package com.example.dishdiary.data.remote;
 
 import android.util.Log;
 
-import androidx.annotation.NonNull;
+
 
 
 import com.example.dishdiary.Constants;
@@ -13,7 +13,8 @@ import com.example.dishdiary.data.model.IngredientResponse;
 import com.example.dishdiary.data.model.MealResponse;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-
+import hu.akarnokd.rxjava3.retrofit.RxJava3CallAdapterFactory;
+import io.reactivex.rxjava3.core.Observable;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -28,7 +29,9 @@ public class Api_Manager implements RemoteSource {
         Gson gson = new GsonBuilder().setLenient().create();
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Constants.BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create(gson)).build();
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
+                .build();
         apiService = retrofit.create(ApiService.class);
     }
 
@@ -40,85 +43,23 @@ public class Api_Manager implements RemoteSource {
     }
 
     @Override
-    public void getDailyMeal(NetworkDelegate callback) {
-
-        Call<MealResponse> call= apiService.getRandomMeal();
-        call.enqueue(new Callback<MealResponse>() {
-
-            @Override
-            public void onResponse(@NonNull Call<MealResponse> call, @NonNull Response<MealResponse> response) {
-                if (response.isSuccessful() && response.body() != null) {
-
-                   //return the random item which is the first item
-                    //the call of this delegate response in the presenter
-                    callback.onMealCallSuccess(response.body().getMeals().get(0));
-                    Log.i(TAG, "OnResponse :" + response.body().getMeals());
-                }
-            }
-            @Override
-            public void onFailure(@NonNull Call<MealResponse> call, Throwable t) {
-                callback.onMealCallFailure(t.getLocalizedMessage());
-                Log.i(TAG,"onFailure: from api manager");
-            }
-        });
+    public Observable<MealResponse> getDailyMeal() {
+        return apiService.getRandomMeal();
     }
 
     @Override
-    public void getCategories(NetworkDelegate callback) {
-      apiService.getCategories().enqueue(new Callback<CategoriesResponse>() {
-          @Override
-          public void onResponse(Call<CategoriesResponse> call, Response<CategoriesResponse> response) {
-            if (response.isSuccessful()) {
-                assert response.body() != null;
-                callback.onCategoryCallSuccess(response.body().getCategoryList());
-                System.out.println("Get data Categ"+response.body());
-                Log.i(TAG,"onFailure: from api manager");
-            }
-            }
-
-          @Override
-          public void onFailure(Call<CategoriesResponse> call, Throwable t) {
-                 callback.onCategoryCallFailure(t.getLocalizedMessage());
-              System.out.println(t.getLocalizedMessage());
-              Log.i(TAG,"onFailure: from api manager");
-          }
-      });
+    public Observable<CategoriesResponse> getCategories() {
+         return  apiService.getCategories();
    }
 
     @Override
-    public void getCountries(NetworkDelegate callback) {
-            apiService.getCountries().enqueue(new Callback<CountriesResponse>() {
-                @Override
-                public void onResponse(Call<CountriesResponse> call, Response<CountriesResponse> response) {
-                    if (response.isSuccessful()) {
-                        assert response.body() != null;
-                        callback.onCountryCallSuccess(response.body().getCountries());
-                    }
-                }
-
-                @Override
-                public void onFailure(Call<CountriesResponse> call, Throwable t) {
-                       callback.onCountryCallFailure(t.getLocalizedMessage());
-                }
-            });
+    public Observable<CountriesResponse> getCountries() {
+           return apiService.getCountries();
     }
 
     @Override
-    public void getIngredients(NetworkDelegate callback) {
-               apiService.getIngredients().enqueue(new Callback<IngredientResponse>() {
-                   @Override
-                   public void onResponse(Call<IngredientResponse> call, Response<IngredientResponse> response) {
-                          if (response.isSuccessful()){
-                              assert response.body() != null;
-                              callback.onIngredientCallSuccess(response.body().getMeals());
-
-                          }
-                   }
-                   @Override
-                   public void onFailure(Call<IngredientResponse> call, Throwable t) {
-                        callback.onIngredientCallFailure(t.getLocalizedMessage());
-                   }
-               });
+    public Observable<IngredientResponse> getIngredients() {
+             return  apiService.getIngredients();
     }
 
     @Override

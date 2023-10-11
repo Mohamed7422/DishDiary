@@ -5,6 +5,8 @@ import com.example.dishdiary.data.model.CategoriesResponse;
 import com.example.dishdiary.data.model.CountriesResponse;
 import com.example.dishdiary.data.model.IngredientResponse;
 import com.example.dishdiary.data.model.MealResponse;
+
+import io.reactivex.rxjava3.core.Observable;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
@@ -12,15 +14,15 @@ import retrofit2.http.Query;
 public interface ApiService {
 
     @GET("random.php")
-    Call<MealResponse> getRandomMeal();
+    Observable<MealResponse> getRandomMeal();
 
     @GET("categories.php")
-    Call<CategoriesResponse> getCategories();
+    Observable<CategoriesResponse> getCategories();
 
     @GET("list.php?a=list")
-    Call<CountriesResponse> getCountries();
+    Observable<CountriesResponse> getCountries();
     @GET("list.php?i=list")
-    Call<IngredientResponse> getIngredients();
+    Observable<IngredientResponse> getIngredients();
 
     @GET("search.php")
     Call<MealResponse> searchByFirstLetter(@Query("f")String fLetter);

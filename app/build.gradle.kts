@@ -58,9 +58,15 @@ dependencies {
     //Lotti animation
     implementation ("com.airbnb.android:lottie:6.1.0")
 
-    //RX Java
-    implementation("io.reactivex.rxjava3:rxandroid:3.0.2")
-    implementation("io.reactivex.rxjava3:rxjava:3.1.6")
+
+    //RX java and android
+    implementation ("io.reactivex.rxjava3:rxjava:3.1.6")
+    implementation ("io.reactivex.rxjava3:rxandroid:3.0.2")
+// optional - RxJava3 support for Retrofit
+    implementation ("com.github.akarnokd:rxjava3-retrofit-adapter:3.0.0")
+// optional - RxJava3 support for Room
+    implementation ("androidx.room:room-rxjava3:2.5.2")
+
 
     //CircleImageView
     implementation ("de.hdodenhof:circleimageview:3.1.0")
