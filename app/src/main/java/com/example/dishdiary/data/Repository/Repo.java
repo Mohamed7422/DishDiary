@@ -2,6 +2,10 @@ package com.example.dishdiary.data.Repository;
 
 import androidx.lifecycle.LiveData;
 
+import com.example.dishdiary.data.model.CategoriesResponse;
+import com.example.dishdiary.data.model.CountriesResponse;
+import com.example.dishdiary.data.model.IngredientResponse;
+import com.example.dishdiary.data.model.MealResponse;
 import com.example.dishdiary.data.model.authDTO.AuthenticationPoJo;
 import com.example.dishdiary.data.model.dto.MealPlanDTO;
 import com.example.dishdiary.data.model.dto.MealsItemDTO;
@@ -11,12 +15,14 @@ import com.example.dishdiary.data.remote.authentication_remote.IFirebaseDelegate
 
 import java.util.List;
 
+import io.reactivex.rxjava3.core.Observable;
+
 public interface Repo {
 
-    void getDailyMeal(NetworkDelegate callback);
-    void getCategories(NetworkDelegate callback);
-    void getCountries(NetworkDelegate callback);
-    void getIngredients(NetworkDelegate callback);
+    Observable<MealResponse> getDailyMeal();
+    Observable<CategoriesResponse> getCategories();
+    Observable<CountriesResponse> getCountries();
+    Observable<IngredientResponse> getIngredients();
     /*****************************************/
     void filterByFirstLetter(String fLetter, FilterNetworkDelegate callback);
     void filterByName(String mealName,FilterNetworkDelegate callback);

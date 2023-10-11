@@ -20,6 +20,7 @@ import com.example.dishdiary.R;
 import com.example.dishdiary.data.Repository.Repo;
 import com.example.dishdiary.data.Repository.RepoImpl;
 import com.example.dishdiary.data.local.LocalDataBaseImpl;
+import com.example.dishdiary.data.model.CategoriesResponse;
 import com.example.dishdiary.data.model.authDTO.AuthSharedPref;
 import com.example.dishdiary.data.model.dto.CategoryDTO;
 import com.example.dishdiary.data.model.dto.CountryDTO;

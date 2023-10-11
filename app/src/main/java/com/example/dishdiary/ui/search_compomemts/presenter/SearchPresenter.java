@@ -1,6 +1,11 @@
 package com.example.dishdiary.ui.search_compomemts.presenter;
 
+
+
 import com.example.dishdiary.data.Repository.Repo;
+import com.example.dishdiary.data.model.CategoriesResponse;
+import com.example.dishdiary.data.model.CountriesResponse;
+import com.example.dishdiary.data.model.IngredientResponse;
 import com.example.dishdiary.data.model.dto.CategoryDTO;
 import com.example.dishdiary.data.model.dto.CountryDTO;
 import com.example.dishdiary.data.model.dto.IngredientDTO;
@@ -10,6 +15,10 @@ import com.example.dishdiary.data.remote.NetworkDelegate;
 import com.example.dishdiary.ui.search_compomemts.view.ISearchFragment;
 
 import java.util.List;
+
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class SearchPresenter implements FilterNetworkDelegate , NetworkDelegate {
 
@@ -22,15 +31,29 @@ public class SearchPresenter implements FilterNetworkDelegate , NetworkDelegate 
     }
 
     public void getCategories() {
-        repo.getCategories(this);
+        Observable<CategoriesResponse> categories = repo.getCategories();
+        categories.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(categoriesResponse -> view.appendCategoriesResult(categoriesResponse.getCategoryList()),
+                        error -> System.out.println(error+"onSearchPresenter"));
     }
 
     public void getCountries() {
-        repo.getCountries(this);
+      Observable<CountriesResponse>  countries =repo.getCountries();
+      countries.subscribeOn(Schedulers.io())
+               .observeOn(AndroidSchedulers.mainThread())
+               .subscribe(
+                       countriesResponse -> view.appendCountriesResult(countriesResponse.getCountries())
+               ,error -> System.out.println(error+"onSearchPresenter"));
     }
 
     public void getIngredients() {
-        repo.getIngredients(this);
+        Observable<IngredientResponse> ingredients =   repo.getIngredients();
+        ingredients.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        ingredientResponse -> view.appendIngredientResult(ingredientResponse.getMeals())
+                );
     }
 
     public void filterByCategory(String filterQuery) {
@@ -86,27 +109,27 @@ public class SearchPresenter implements FilterNetworkDelegate , NetworkDelegate 
 
     @Override
     public void onCategoryCallSuccess(List<CategoryDTO> categoriesList) {
-         view.appendCategoriesResult(categoriesList);
+//         view.appendCategoriesResult(categoriesList);
     }
 
     @Override
     public void onCategoryCallFailure(String errorMsg) {
-        view.appendErrorMsg(errorMsg);
+//        view.appendErrorMsg(errorMsg);
     }
 
     @Override
     public void onCountryCallSuccess(List<CountryDTO> countriesList) {
-      view.appendCountriesResult(countriesList);
+//      view.appendCountriesResult(countriesList);
     }
 
     @Override
     public void onCountryCallFailure(String errorMsg) {
-        view.appendErrorMsg(errorMsg);
+//        view.appendErrorMsg(errorMsg);
     }
 
     @Override
     public void onIngredientCallSuccess(List<IngredientDTO> ingredientsList) {
-     view.appendIngredientResult(ingredientsList);
+      view.appendIngredientResult(ingredientsList);
     }
 
     @Override

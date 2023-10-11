@@ -1,21 +1,26 @@
 package com.example.dishdiary.data.Repository;
 
-import android.content.SharedPreferences;
+
 
 import androidx.lifecycle.LiveData;
 
 import com.example.dishdiary.data.local.LocalDB;
+import com.example.dishdiary.data.model.CategoriesResponse;
+import com.example.dishdiary.data.model.CountriesResponse;
+import com.example.dishdiary.data.model.IngredientResponse;
+import com.example.dishdiary.data.model.MealResponse;
 import com.example.dishdiary.data.model.authDTO.AuthenticationPoJo;
 import com.example.dishdiary.data.model.authDTO.ISharedPref;
 import com.example.dishdiary.data.model.dto.MealPlanDTO;
 import com.example.dishdiary.data.model.dto.MealsItemDTO;
 import com.example.dishdiary.data.remote.FilterNetworkDelegate;
-import com.example.dishdiary.data.remote.NetworkDelegate;
-import com.example.dishdiary.data.remote.RemoteSource;
+ import com.example.dishdiary.data.remote.RemoteSource;
 import com.example.dishdiary.data.remote.authentication_remote.FirebaseSource;
 import com.example.dishdiary.data.remote.authentication_remote.IFirebaseDelegate;
 
 import java.util.List;
+
+import io.reactivex.rxjava3.core.Observable;
 
 public class RepoImpl implements Repo {
     RemoteSource remoteSource;
@@ -46,24 +51,24 @@ public class RepoImpl implements Repo {
 
 
     @Override
-    public void getDailyMeal(NetworkDelegate callback) {
-        remoteSource.getDailyMeal(callback);
+    public Observable<MealResponse> getDailyMeal() {
+        return remoteSource.getDailyMeal();
     }
 
     @Override
-    public void getCategories(NetworkDelegate callback) {
-      remoteSource.getCategories(callback);
+    public Observable<CategoriesResponse> getCategories() {
+     return remoteSource.getCategories();
 
     }
 
     @Override
-    public void getCountries(NetworkDelegate callback) {
-     remoteSource.getCountries(callback);
+    public Observable<CountriesResponse> getCountries() {
+     return  remoteSource.getCountries();
     }
 
     @Override
-    public void getIngredients(NetworkDelegate callback) {
-     remoteSource.getIngredients(callback);
+    public Observable<IngredientResponse> getIngredients() {
+     return  remoteSource.getIngredients();
     }
 
     @Override
