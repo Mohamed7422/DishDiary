@@ -12,10 +12,9 @@
         android:layout_height="wrap_content"
         android:background="@drawable/sign_up_background"
         android:layout_margin="5dp"
-
+        android:backgroundTint="@color/gray_open"
         app:layout_constraintTop_toTopOf="parent"
-
-
+        android:focusable="false"
         />
 
 
@@ -33,7 +32,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         style="@style/Widget.Material3.Chip.Filter"
-        android:backgroundTint="@color/gray_open"
+        android:backgroundTint="@color/txtColor"
         android:text="@string/country"
         android:fontFamily="@font/alata"
         android:textColor="@color/black"
@@ -48,10 +47,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/ingredient"
+        android:backgroundTint="@color/txtColor"
         android:fontFamily="@font/alata"
         android:textColor="@color/black"
         android:textAlignment="center"
-        android:backgroundTint="@color/gray_open"
+
         style="@style/Widget.Material3.Chip.Filter"
 
 
@@ -65,7 +65,7 @@
         android:fontFamily="@font/alata"
         android:textColor="@color/black"
         android:textAlignment="center"
-        android:backgroundTint="@color/gray_open"
+        android:backgroundTint="@color/txtColor"
         style="@style/Widget.Material3.Chip.Filter"
          />
 
@@ -84,6 +84,19 @@
         app:layout_constraintBottom_toBottomOf="parent"
 
         />
+
+      <ImageView
+          android:id="@+id/emptySearchImg"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:src="@drawable/baseline_search"
+          android:visibility="gone"
+
+          app:layout_constraintTop_toBottomOf="@id/categoryGroup"
+          app:layout_constraintBottom_toBottomOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintEnd_toEndOf="parent"
+          />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline4"

@@ -4,6 +4,10 @@
         android:id="@+id/homeItem"
         android:icon="@drawable/baseline_home"
         android:title="Home"
+        android:enabled="true"
+        
+
+
                 />
 
     <item

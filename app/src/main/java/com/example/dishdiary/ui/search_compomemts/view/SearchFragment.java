@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.dishdiary.Constants;
@@ -54,6 +55,7 @@ public class SearchFragment extends Fragment implements ISearchFragment, SearchR
     SearchView searchView;
     ChipGroup chipGroup;
 
+    ImageView emptySearchImg;
     RecyclerView mealsRecyclerView;
 
     SearchRecyclerAdapter mealsSearchAdapter,categorySearchAdapter
@@ -88,6 +90,8 @@ public class SearchFragment extends Fragment implements ISearchFragment, SearchR
         * and swap the recycler based on that
         *  */
 
+        emptySearchImg.setVisibility(View.VISIBLE);
+
         int state = -1;
         String filter="";
         Bundle arguments = getArguments();
@@ -98,11 +102,13 @@ public class SearchFragment extends Fragment implements ISearchFragment, SearchR
             if (!filter.isEmpty()){
                 if (state == Constants.CATEGORIES)
                 {
+                    emptySearchImg.setVisibility(View.GONE);
                     mealsRecyclerView.swapAdapter(mealsSearchAdapter,true);
                     searchPresenter.filterByCategory(filter);
 
 
                 } else if (state == Constants.COUNTRIES) {
+                    emptySearchImg.setVisibility(View.GONE);
                     mealsRecyclerView.swapAdapter(mealsSearchAdapter,true);
                     searchPresenter.filterByCountry(filter);
 
@@ -119,6 +125,7 @@ public class SearchFragment extends Fragment implements ISearchFragment, SearchR
 
     private void initViews(View view) {
 
+        emptySearchImg = view.findViewById(R.id.emptySearchImg);
         searchView = view.findViewById(R.id.search_id);
         chipGroup  = view.findViewById(R.id.categoryGroup);
 
@@ -138,76 +145,76 @@ public class SearchFragment extends Fragment implements ISearchFragment, SearchR
 
 
     private void setListeners() {
-        chipGroup.setOnCheckedChangeListener(new ChipGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(@NonNull ChipGroup group, int checkedId) {
-                Chip chip = group.findViewById(checkedId);
-                if (chip!= null){
+        chipGroup.setOnCheckedChangeListener((group, checkedId) -> {
+            Chip chip = group.findViewById(checkedId);
+            if (chip!= null){
 
-                    if (checkedId == R.id.country_id){
-                        if (ingredientSearch != null){
-                            if (ingredientSearchTwo != null){
-                                ingredientSearchTwo.dispose();
-                                ingredientSearchTwo = null;
-                            }
-                            ingredientSearch.dispose();
-                            ingredientSearch = null;
-
-                            bindSearch();
-
+                if (checkedId == R.id.country_id){
+                    emptySearchImg.setVisibility(View.GONE);
+                    if (ingredientSearch != null){
+                        if (ingredientSearchTwo != null){
+                            ingredientSearchTwo.dispose();
+                            ingredientSearchTwo = null;
                         }
-                        mealsRecyclerView.swapAdapter(countrySearchAdapter,true);
-                        searchPresenter.getCountries();
-                    } else if (checkedId == R.id.ingredient_Id) {
-                        mealsRecyclerView.swapAdapter(ingredientsSearchAdapter,true);
-                        searchPresenter.getIngredients();
-                        ingredientSearch = Observable.create(new ObservableOnSubscribe<String>() {
-                                    @Override
-                                    public void subscribe(ObservableEmitter<String> emit) {
-                                        searchView.setOnQueryTextListener(new  SearchView.OnQueryTextListener() {
-                                            @Override
-                                            public boolean onQueryTextSubmit(String query) {
-                                                return false;
-                                            }
+                        ingredientSearch.dispose();
+                        ingredientSearch = null;
 
-                                            @Override
-                                            public boolean onQueryTextChange(String newText) {
-                                                emit.onNext(newText);
-                                                return true;
-                                            }
-                                        });
-                                    }
-                                }).debounce(1, TimeUnit.SECONDS)
-                                .subscribe(rule -> {
-                                    ingredientSearchTwo = Observable.fromIterable(ingredients)
-                                            .subscribeOn(AndroidSchedulers.mainThread())
-                                            .observeOn(AndroidSchedulers.mainThread())
-                                            .filter(s -> s.getStrIngredient().toLowerCase().contains(rule.toLowerCase()))
-                                            .subscribe(s -> {
-                                                searchIngredients.add(s);
-                                                ingredientsSearchAdapter.setIngredientList(searchIngredients);
-                                            });
-                                    searchIngredients.clear();
-                                });
-                    }else if (checkedId == R.id.category_id) {
-
-                        if (ingredientSearch != null){
-                            if (ingredientSearchTwo != null){
-                                ingredientSearchTwo.dispose();
-                                ingredientSearchTwo = null;
-                            }
-                            ingredientSearch.dispose();
-                            ingredientSearch = null;
-
-                            bindSearch();
-
-                        }
-                        mealsRecyclerView.swapAdapter(categorySearchAdapter,true);
-                        searchPresenter.getCategories();
+                        bindSearch();
 
                     }
+                    mealsRecyclerView.swapAdapter(countrySearchAdapter,true);
+                    searchPresenter.getCountries();
+                } else if (checkedId == R.id.ingredient_Id) {
+                    emptySearchImg.setVisibility(View.GONE);
+                    mealsRecyclerView.swapAdapter(ingredientsSearchAdapter,true);
+                    searchPresenter.getIngredients();
+                    ingredientSearch = Observable.create(new ObservableOnSubscribe<String>() {
+                                @Override
+                                public void subscribe(ObservableEmitter<String> emit) {
+                                    searchView.setOnQueryTextListener(new  SearchView.OnQueryTextListener() {
+                                        @Override
+                                        public boolean onQueryTextSubmit(String query) {
+                                            return false;
+                                        }
+
+                                        @Override
+                                        public boolean onQueryTextChange(String newText) {
+                                            emit.onNext(newText);
+                                            return true;
+                                        }
+                                    });
+                                }
+                            }).debounce(1, TimeUnit.SECONDS)
+                            .subscribe(rule -> {
+                                ingredientSearchTwo = Observable.fromIterable(ingredients)
+                                        .subscribeOn(AndroidSchedulers.mainThread())
+                                        .observeOn(AndroidSchedulers.mainThread())
+                                        .filter(s -> s.getStrIngredient().toLowerCase().contains(rule.toLowerCase()))
+                                        .subscribe(s -> {
+                                            searchIngredients.add(s);
+                                            ingredientsSearchAdapter.setIngredientList(searchIngredients);
+                                        });
+                                searchIngredients.clear();
+                            });
+                }else if (checkedId == R.id.category_id) {
+                    emptySearchImg.setVisibility(View.GONE);
+
+                    if (ingredientSearch != null){
+                        if (ingredientSearchTwo != null){
+                            ingredientSearchTwo.dispose();
+                            ingredientSearchTwo = null;
+                        }
+                        ingredientSearch.dispose();
+                        ingredientSearch = null;
+
+                        bindSearch();
+
+                    }
+                    mealsRecyclerView.swapAdapter(categorySearchAdapter,true);
+                    searchPresenter.getCategories();
 
                 }
+
             }
         });
 

@@ -41,7 +41,7 @@ public class ProfileFragment extends Fragment implements IProfileV{
     de.hdodenhof.circleimageview.CircleImageView userImg;
     TextView user_name,favouriteMeals_id,weak_Plan,singInRequiredTV;
 
-    Button logOutBtn,backup;
+    Button logOutBtn,backup,signInRequiredBtn;
     ProfilePresenter presenter;
     List<MealsItemDTO> mealsItemList;
     List<MealPlanDTO> mealsPlanList;
@@ -69,20 +69,10 @@ public class ProfileFragment extends Fragment implements IProfileV{
                     LocalDataBaseImpl.getInstance(getContext()),
                     AuthSharedPref.getInstance(getContext()), FireBaseManager.getInstance()),this);
 
-            presenter.getCashedFavMeals().observe(getViewLifecycleOwner(), new Observer<List<MealsItemDTO>>() {
-                @Override
-                public void onChanged(List<MealsItemDTO> mealsItemDTOS) {
-                    mealsItemList = mealsItemDTOS;
-                }
-            });
+            presenter.getCashedFavMeals().observe(getViewLifecycleOwner(), mealsItemDTOS -> mealsItemList = mealsItemDTOS);
 
             presenter.getCashedMealsPlanned().observe(getViewLifecycleOwner(),
-                    new Observer<List<MealPlanDTO>>() {
-                @Override
-                public void onChanged(List<MealPlanDTO> mealPlanDTOList) {
-                    mealsPlanList = mealPlanDTOList;
-                }
-            });
+                    mealPlanDTOList -> mealsPlanList = mealPlanDTOList);
            // logOutBtn.setVisibility(View.GONE);
             user_name.setText(FirebaseAuth.getInstance().getCurrentUser().getDisplayName());
 
@@ -94,26 +84,30 @@ public class ProfileFragment extends Fragment implements IProfileV{
                 Navigation.findNavController(view).navigate(R.id.action_profileFragment_to_weaklyPlanFragment);
             });
 
-            logOutBtn.setOnClickListener(v ->{
-                presenter.uploadMeals(
-                        FirebaseAuth.getInstance().getCurrentUser().getEmail(),mealsPlanList,
-                        mealsItemList,1
-                );
-            });
+            logOutBtn.setOnClickListener(v -> presenter.uploadMeals(
+                    FirebaseAuth.getInstance().getCurrentUser().getEmail(),mealsPlanList,
+                    mealsItemList,1
+            ));
 
-            backup.setOnClickListener(v -> {
-
-                presenter.uploadMeals(FirebaseAuth.getInstance().getCurrentUser().getEmail(), mealsPlanList, mealsItemList , 0);
-            });
+            backup.setOnClickListener(v -> presenter.uploadMeals(FirebaseAuth.getInstance().getCurrentUser().getEmail(), mealsPlanList, mealsItemList , 0));
 
         }else {
+            singInRequiredTV.setVisibility(View.VISIBLE);
             userImg.setVisibility(View.GONE);
             user_name.setVisibility(View.GONE);
             favouriteMeals_id.setVisibility(View.GONE);
             logOutBtn.setVisibility(View.GONE);
             weak_Plan.setVisibility(View.GONE);
             backup.setVisibility(View.GONE);
-            singInRequiredTV.setVisibility(View.VISIBLE);
+            signInRequiredBtn.setVisibility(View.VISIBLE);
+
+            //make sign in button visible and navigate to log in screen
+            signInRequiredBtn.setOnClickListener(item -> {
+                        Intent intent = new Intent(getActivity(),SplashActivity.class);
+                        startActivity(intent);
+                    }
+
+                    );
 
 
         }
@@ -128,6 +122,7 @@ public class ProfileFragment extends Fragment implements IProfileV{
         logOutBtn =view.findViewById(R.id.log_out_id);
         backup = view.findViewById(R.id.backup);
         singInRequiredTV = view.findViewById(R.id.signInRequired);
+        signInRequiredBtn =  view.findViewById(R.id.signInRequiredBtn);
     }
 
     @Override

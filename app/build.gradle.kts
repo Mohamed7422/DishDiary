@@ -92,7 +92,9 @@ dependencies {
     implementation("com.google.firebase:firebase-firestore")
 
     //apply shimmer layout
-    implementation ("com.facebook.shimmer:shimmer:0.5.0");
+    implementation ("com.facebook.shimmer:shimmer:0.5.0")
+
+
 
 
 

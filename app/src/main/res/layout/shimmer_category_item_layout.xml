@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
+    android:layout_width="96dp"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_margin="5dp"
     app:cardElevation="2dp"
     app:cardCornerRadius="15dp"
-    android:id="@+id/categoryCard"
+
     >
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -14,10 +14,10 @@
         android:layout_height="match_parent"
         >
         <ImageView
-            android:id="@+id/category_image_item"
+
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@drawable/baseline_image"
+            android:background="@drawable/baseline_image"
 
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -25,29 +25,10 @@
 
             />
 
-        <TextView
-            android:id="@+id/category_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/corner_shape"
-            android:text="Meat"
-            android:textColor="@color/black"
-            android:textStyle="bold"
-            android:paddingStart="10dp"
-            android:paddingEnd="10dp"
 
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-
-            />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
-
 
 </androidx.cardview.widget.CardView>
 

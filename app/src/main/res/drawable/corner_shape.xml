@@ -2,9 +2,9 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item>
         <shape>
-            <solid android:color="#C1AAAAAA" /> <!-- Set the shape's background color to transparent -->
-            <corners android:radius="10dp" /> <!-- Adjust the radius to control the corner roundness -->
-            <stroke android:width="0.5dp" android:color="@color/yellow_dark_bg_color" /> <!-- Set the stroke (border) color to yellow -->
+            <solid android:color="#B5BCA37F" />
+            <corners android:radius="13dp" />
+            <stroke android:width="0.5dp" android:color="@color/txtColor" />
         </shape>
     </item>
 </selector>

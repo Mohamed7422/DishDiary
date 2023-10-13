@@ -121,6 +121,7 @@ public class LogInFragment extends Fragment implements ILogIn {
     }
 
     private void signInWithGoogle() {
+        loginProgress.setVisibility(View.VISIBLE);
         GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions
                 .Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
@@ -146,10 +147,12 @@ public class LogInFragment extends Fragment implements ILogIn {
             Task<GoogleSignInAccount> signedInAccountFromIntent = GoogleSignIn.getSignedInAccountFromIntent(data);
             try {
                 GoogleSignInAccount result = signedInAccountFromIntent.getResult(ApiException.class);
+                loginProgress.setVisibility(View.GONE);
                 //auth with firebase
                 authWithGoogleByFb(result);
 
             } catch (ApiException e) {
+                loginProgress.setVisibility(View.GONE);
                 System.out.println("ApiException "+e.getLocalizedMessage());
             }
 

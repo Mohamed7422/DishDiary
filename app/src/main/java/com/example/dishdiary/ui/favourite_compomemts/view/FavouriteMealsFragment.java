@@ -63,8 +63,9 @@ public class FavouriteMealsFragment extends Fragment implements IFavouriteMeals
 
         presenter = new Presenter(RepoImpl.getInstance(Api_Manager.getInstance(), LocalDataBaseImpl.getInstance(requireContext()),
                 AuthSharedPref.getInstance(requireContext()), FireBaseManager.getInstance()),this);
-        presenter.getFavouriteMeals();
+
         if (FirebaseAuth.getInstance().getCurrentUser()!=null){
+            presenter.getFavouriteMeals();
              if (!mealsListRetrievedInd){
 
                  presenter.downloadMeals(FirebaseAuth.getInstance().getCurrentUser().getEmail());

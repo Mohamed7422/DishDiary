@@ -55,7 +55,7 @@ public class HomeFragment extends Fragment  implements IHomeFragment , CategoryR
     CountryRecyclerAdapter countryRecyclerAdapter;
     LinearLayoutManager categoryLayoutManager;
     LinearLayoutManager countryLayoutManager;
-    ShimmerFrameLayout shimmerFrameLayout;
+
 
     ImageView dailyMealImg;
     TextView dailyMealName;
@@ -64,6 +64,7 @@ public class HomeFragment extends Fragment  implements IHomeFragment , CategoryR
     ImageView no_connection_img;
 
     CardView cardDailyItem;
+    ShimmerFrameLayout shimmerDailyMeal,category_shimmer_container,country_shimmer_container;
 
 
 
@@ -77,14 +78,6 @@ public class HomeFragment extends Fragment  implements IHomeFragment , CategoryR
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-
         getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         homePresenter = new HomePresenter(RepoImpl.getInstance(Api_Manager.getInstance(), LocalDataBaseImpl.getInstance(requireContext()),
@@ -94,6 +87,14 @@ public class HomeFragment extends Fragment  implements IHomeFragment , CategoryR
         homePresenter.getDailyMeal();
         homePresenter.getCategories();
         homePresenter.getCountries();
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+
+
 
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         initViews(view);
@@ -113,11 +114,14 @@ public class HomeFragment extends Fragment  implements IHomeFragment , CategoryR
         categoryRecyclerView = view.findViewById(R.id.category_RV);
 
         cardDailyItem = view.findViewById(R.id.card_daily_item);
-        shimmerFrameLayout = view.findViewById(R.id.skeltonLayout);
+
         no_connection_img = view.findViewById(R.id.no_connection_img);
         daily_meal = view.findViewById(R.id.daily_meal);
         category = view.findViewById(R.id.category);
         country = view.findViewById(R.id.country);
+        shimmerDailyMeal = view.findViewById(R.id.shimmerDailyMeal);
+        category_shimmer_container = view.findViewById(R.id.category_shimmer_container);
+        country_shimmer_container = view.findViewById(R.id.country_shimmer_container);
 
 
         //Recycler Initiation
@@ -132,12 +136,12 @@ public class HomeFragment extends Fragment  implements IHomeFragment , CategoryR
         countryLayoutManager  = new LinearLayoutManager(getContext());
         countryLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         countryRecyclerView.setLayoutManager(countryLayoutManager);
+
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
 
     }
 
@@ -149,7 +153,7 @@ public class HomeFragment extends Fragment  implements IHomeFragment , CategoryR
         appendViews();
 
         Log.i(TAG,"Daily Meal " + mealsItemDTO.getStrArea());
-        shimmerFrameLayout.setVisibility(View.GONE);
+        shimmerDailyMeal.setVisibility(View.GONE);
 
             dailyMealName.setText(mealsItemDTO.getMealName());
             Glide.with(this)
@@ -223,7 +227,8 @@ public class HomeFragment extends Fragment  implements IHomeFragment , CategoryR
         no_connection_img.setVisibility(View.GONE);
         appendViews();
         Log.i(TAG,"categories " + categories.toString());
-        shimmerFrameLayout.setVisibility(View.GONE);
+        //shimmerFrameLayout.setVisibility(View.GONE);
+        category_shimmer_container.setVisibility(View.GONE);
         //send the list to the adapter
         categoryRecyclerAdapter.setCategoriesList(categories);
         categoryRecyclerView.setAdapter(categoryRecyclerAdapter);
@@ -234,7 +239,8 @@ public class HomeFragment extends Fragment  implements IHomeFragment , CategoryR
     public void getCountriesList(List<CountryDTO> countries) {
         no_connection_img.setVisibility(View.GONE);
         appendViews();
-        shimmerFrameLayout.setVisibility(View.GONE);
+        country_shimmer_container.setVisibility(View.GONE);
+
         Log.i(TAG,"countries " + countries.get(0).getStrArea().toString());
 
         countryRecyclerAdapter.setCountriesList(countries);

@@ -14,37 +14,31 @@
             android:id="@+id/action_homeFragment_to_searchFragment2"
             app:destination="@id/searchFragment"
             app:popUpToInclusive="false" />
+        <action
+            android:id="@+id/action_homeFragment_to_favouriteMealsFragment"
+            app:destination="@id/favouriteMealsFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_weaklyPlanFragment"
+            app:destination="@id/weaklyPlanFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
         android:name="com.example.dishdiary.ui.search_compomemts.view.SearchFragment"
         android:label="fragment_search"
-        tools:layout="@layout/fragment_search" >
-        <action
-            android:id="@+id/action_searchFragment_to_favouriteMealsFragment"
-            app:destination="@id/favouriteMealsFragment"
-            app:popUpTo="@id/homeFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_search" />
     <fragment
         android:id="@+id/favouriteMealsFragment"
         android:name="com.example.dishdiary.ui.favourite_compomemts.view.FavouriteMealsFragment"
         android:label="fragment_favourite_meals"
-        tools:layout="@layout/fragment_favourite_meals" >
-        <action
-            android:id="@+id/action_favouriteMealsFragment_to_weaklyPlanFragment"
-            app:destination="@id/weaklyPlanFragment"
-            app:popUpTo="@id/homeFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_favourite_meals" />
     <fragment
         android:id="@+id/weaklyPlanFragment"
         android:name="com.example.dishdiary.ui.weakly_plan_compomemts.view.WeaklyPlanFragment"
         android:label="fragment_weakly_plan"
-        tools:layout="@layout/fragment_weakly_plan" >
-        <action
-            android:id="@+id/action_weaklyPlanFragment_to_profileFragment"
-            app:destination="@id/profileFragment"
-            app:popUpTo="@id/homeFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_weakly_plan" />
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.example.dishdiary.ui.profile_compomemts.view.ProfileFragment"

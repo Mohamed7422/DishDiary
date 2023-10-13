@@ -120,8 +120,8 @@ public class WeaklyPlanFragment extends Fragment implements IWeakPlan, WeakDaysR
 
                                 dishesAdapter.setMealPlanList(mealPlanDTOList);
                                 if (mealPlanDTOList.size() ==0){
-                                    Toast.makeText(getContext(), "No Meals on The Plan,add more", Toast.LENGTH_SHORT).show();
-                                    signInRequiredPlanBtn.setText("No Meals on The Plan,add more");
+                               //     Toast.makeText(getContext(), "No Meals on The Plan,add more", Toast.LENGTH_SHORT).show();
+                                    signInRequiredPlanBtn.setText("No Meals");
                                     signInRequiredPlanBtn.setVisibility(View.VISIBLE);
                                 }else {
                                     signInRequiredPlanBtn.setVisibility(View.GONE);

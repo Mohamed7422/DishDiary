@@ -20,20 +20,19 @@
         />
 
 
-
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/button_navigation_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/nav_background_curved"
-        app:labelVisibilityMode="unlabeled"
 
+        style="@style/Widget.Design.BottomNavigationView"
+        app:itemRippleColor="@color/bottomNavColor"
+        app:labelVisibilityMode="unlabeled"
         app:layout_constraintBottom_toBottomOf="parent"
+        android:background="@drawable/nav_background_curved"
 
         app:menu="@menu/bottom_navigation_menu"
         tools:layout_editor_absoluteX="0dp" />
-
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

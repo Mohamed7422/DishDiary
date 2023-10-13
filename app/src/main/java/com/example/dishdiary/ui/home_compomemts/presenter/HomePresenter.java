@@ -35,7 +35,8 @@ public class HomePresenter implements IHomePresenter , NetworkDelegate {
         Observable<MealResponse> dailyMeals = repo.getDailyMeal();
         dailyMeals.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(mealResponse -> homeFragment.getDailyMeal(mealResponse.getMeals().get(0)));
+                .subscribe(mealResponse -> homeFragment.getDailyMeal(mealResponse.getMeals().get(0)),
+                        error ->  homeFragment.appendConnectionError(error.getLocalizedMessage()));
 
     }
 
@@ -44,7 +45,9 @@ public class HomePresenter implements IHomePresenter , NetworkDelegate {
         Observable<CategoriesResponse> categories = repo.getCategories();
         categories.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(categoriesResponse -> homeFragment.getCategoriesList(categoriesResponse.getCategoryList()));
+                .subscribe(
+                        categoriesResponse -> homeFragment.getCategoriesList(categoriesResponse.getCategoryList()),
+                        error ->  homeFragment.appendConnectionError(error.getLocalizedMessage()));
     }
 
     @Override
@@ -56,7 +59,7 @@ public class HomePresenter implements IHomePresenter , NetworkDelegate {
                         countriesResponse ->
                                 homeFragment.getCountriesList(countriesResponse.getCountries()),
                         error ->{
-                            System.out.println(error+"onHomePresenter");
+                           homeFragment.appendConnectionError(error.getLocalizedMessage());
                         });
     }
 

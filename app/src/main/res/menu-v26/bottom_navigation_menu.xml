@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/homeItem"
+        android:icon="@drawable/baseline_home"
+        android:title="Home"
+        android:enabled="true"
+        android:iconTint="@color/txtColor"
+        android:iconTintMode="src_in"
+                />
+
+    <item
+        android:id="@+id/searchItem"
+        android:icon="@drawable/baseline_search"
+
+        android:title="Search" />
+
+    <item
+        android:id="@+id/favouriteItem"
+        android:icon="@drawable/baseline_favorite"
+
+        android:title="Favourite" />
+
+    <item
+        android:id="@+id/weak_calender_mealsItem"
+        android:icon="@drawable/outline_calendar_view_weak"
+        android:title="Calender" />
+
+    <item
+        android:id="@+id/profileItem"
+        android:icon="@drawable/baseline_person"
+        android:title="Profile"
+         />
+</menu>

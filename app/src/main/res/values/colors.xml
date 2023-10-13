@@ -8,4 +8,7 @@
     <color name="gray_open">#E7E3E3</color>
     <color name="red">#DB3333</color>
     <color name="buttom_navigation_bar_color">#69D07607</color>
+    <color name="bottomNavColor">#BCA37F</color>
+
+    <color name="txtColor">#BCA37F</color>
 </resources>

@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:text="@string/daily_meal"
-        android:textColor="@color/yellow_dark_bg_color"
+        android:textColor="@color/txtColor"
         android:textSize="@dimen/text_size_very_large"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@id/guideline"
@@ -35,7 +35,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="10dp"
-        app:cardElevation="11dp"
+        app:cardElevation="18dp"
 
         app:cardCornerRadius="15dp"
         app:layout_constraintHeight_percent="0.3"
@@ -63,9 +63,9 @@
                android:id="@+id/daily_meal_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:text="lsgos"
-                android:textColor="@color/black"
 
+                android:textColor="@color/black"
+                android:text="loading..."
                 android:padding="5dp"
                 android:background="@drawable/corner_shape"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -85,7 +85,66 @@
                 app:layout_constraintTop_toTopOf="parent"
                  app:layout_constraintEnd_toEndOf="parent" />
 
+              <com.facebook.shimmer.ShimmerFrameLayout
+                  android:id="@+id/shimmerDailyMeal"
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  app:layout_constraintTop_toTopOf="parent"
+                  app:layout_constraintBottom_toBottomOf="parent"
+                  app:layout_constraintStart_toStartOf="parent"
+                  app:layout_constraintEnd_toEndOf="parent"
 
+                  >
+
+                  <androidx.constraintlayout.widget.ConstraintLayout
+                      android:layout_width="match_parent"
+                      android:layout_height="match_parent"
+                      >
+
+
+                      <ImageView
+
+                          android:layout_width="match_parent"
+                          android:layout_height="match_parent"
+                          android:scaleType="fitXY"
+                          android:src="@drawable/baseline_image"
+                          />
+
+                      <TextView
+
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:text="loading..."
+
+
+                          android:padding="5dp"
+
+                          app:layout_constraintBottom_toBottomOf="parent"
+                          android:layout_marginStart="15dp"
+                          android:layout_marginBottom="15dp"
+                          app:layout_constraintStart_toStartOf="parent"
+
+                          />
+
+
+                      <ImageView
+
+                          android:layout_width="30dp"
+                          android:layout_height="30dp"
+                          android:layout_margin="20dp"
+                          android:src="@drawable/baseline_favorite"
+                          android:backgroundTint="@color/gray_open"
+
+                          android:backgroundTintMode="src_over"
+                          app:layout_constraintTop_toTopOf="parent"
+                          app:layout_constraintEnd_toEndOf="parent" />
+
+
+
+                  </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+              </com.facebook.shimmer.ShimmerFrameLayout>
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -97,9 +156,9 @@
         android:id="@+id/category"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:text="@string/category"
-        android:textColor="@color/yellow_dark_bg_color"
+        android:textColor="@color/txtColor"
         android:textSize="@dimen/text_size_very_large"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@id/guideline"
@@ -107,28 +166,112 @@
 
         />
 
+
+
+    <com.facebook.shimmer.ShimmerFrameLayout
+
+        android:id="@+id/category_shimmer_container"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal"
+        
+        app:layout_constraintEnd_toEndOf="@id/guideline3"
+        app:layout_constraintHeight_percent="0.20"
+        app:layout_constraintStart_toStartOf="@id/guideline"
+        app:layout_constraintTop_toBottomOf="@id/category"
+
+        >
+        
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            >
+            <include layout="@layout/shimmer_category_item_layout"/>
+            <include layout="@layout/shimmer_category_item_layout"/>
+            <include layout="@layout/shimmer_category_item_layout"/>
+            <include layout="@layout/shimmer_category_item_layout"/>
+            <include layout="@layout/shimmer_category_item_layout"/>
+            <include layout="@layout/shimmer_category_item_layout"/>
+            <include layout="@layout/shimmer_category_item_layout"/>
+            <include layout="@layout/shimmer_category_item_layout"/>
+            <include layout="@layout/shimmer_category_item_layout"/>
+            <include layout="@layout/shimmer_category_item_layout"/>
+
+        </LinearLayout>
+
+
+    </com.facebook.shimmer.ShimmerFrameLayout>
+
+
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/category_RV"
         android:layout_width="0dp"
         android:layout_height="0dp"
+
         android:layout_marginTop="10dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="@id/guideline3"
-        app:layout_constraintHeight_percent="0.15"
+        app:layout_constraintHeight_percent="0.20"
         app:layout_constraintStart_toStartOf="@id/guideline"
-        app:layout_constraintTop_toBottomOf="@id/category" />
+        app:layout_constraintTop_toBottomOf="@id/category" >
+
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+
 
     <TextView
         android:id="@+id/country"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:text="@string/country"
-        android:textColor="@color/yellow_dark_bg_color"
+        android:textColor="@color/txtColor"
         android:textSize="@dimen/text_size_very_large"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@id/guideline"
         app:layout_constraintTop_toBottomOf="@id/category_RV" />
+
+    <com.facebook.shimmer.ShimmerFrameLayout
+
+        android:id="@+id/country_shimmer_container"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal"
+
+        app:layout_constraintEnd_toEndOf="@id/guideline3"
+        app:layout_constraintHeight_percent="0.20"
+        app:layout_constraintStart_toStartOf="@id/guideline"
+        app:layout_constraintTop_toBottomOf="@id/country"
+
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            >
+            <include layout="@layout/shimmer_category_item_layout"/>
+            <include layout="@layout/shimmer_category_item_layout"/>
+            <include layout="@layout/shimmer_category_item_layout"/>
+            <include layout="@layout/shimmer_category_item_layout"/>
+            <include layout="@layout/shimmer_category_item_layout"/>
+            <include layout="@layout/shimmer_category_item_layout"/>
+            <include layout="@layout/shimmer_category_item_layout"/>
+            <include layout="@layout/shimmer_category_item_layout"/>
+            <include layout="@layout/shimmer_category_item_layout"/>
+            <include layout="@layout/shimmer_category_item_layout"/>
+
+        </LinearLayout>
+
+
+    </com.facebook.shimmer.ShimmerFrameLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/country_RV"
@@ -137,11 +280,9 @@
         android:layout_marginTop="8dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="@id/guideline3"
-        app:layout_constraintHeight_percent="0.15"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHeight_percent="0.20"
         app:layout_constraintStart_toStartOf="@id/guideline"
         app:layout_constraintTop_toBottomOf="@id/country" />
-
 
 
     <androidx.constraintlayout.widget.Guideline
@@ -149,7 +290,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_begin="15dp" />
+        app:layout_constraintGuide_percent="0.03892944" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline3"
@@ -158,17 +299,7 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.9659367" />
 
-    <com.facebook.shimmer.ShimmerFrameLayout
-        android:id="@+id/skeltonLayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        >
 
-        <include layout="@layout/home_skeleton_layout" />
-
-    </com.facebook.shimmer.ShimmerFrameLayout>
 
     <ImageView
         android:id="@+id/no_connection_img"
@@ -182,7 +313,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         />
-
 
 
 

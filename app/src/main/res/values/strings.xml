@@ -32,4 +32,6 @@
     <string name="enter_your_email">Enter Your Email</string>
     <string name="reset_password">Reset Password</string>
     <string name="favourite_meals_are_empty">Favourite meals are empty</string>
+    <string name="backup">Backup</string>
+    <string name="recipe">Recipe</string>
 </resources>
