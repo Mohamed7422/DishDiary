@@ -3,7 +3,7 @@ package com.example.dishdiary.ui.search_compomemts.view;
 import android.content.Intent;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
+
 import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -18,10 +18,10 @@ import android.widget.Toast;
 
 import com.example.dishdiary.Constants;
 import com.example.dishdiary.R;
-import com.example.dishdiary.data.Repository.Repo;
+
 import com.example.dishdiary.data.Repository.RepoImpl;
 import com.example.dishdiary.data.local.LocalDataBaseImpl;
-import com.example.dishdiary.data.model.CategoriesResponse;
+
 import com.example.dishdiary.data.model.authDTO.AuthSharedPref;
 import com.example.dishdiary.data.model.dto.CategoryDTO;
 import com.example.dishdiary.data.model.dto.CountryDTO;
@@ -29,7 +29,7 @@ import com.example.dishdiary.data.model.dto.IngredientDTO;
 import com.example.dishdiary.data.model.dto.MealsItemDTO;
 import com.example.dishdiary.data.remote.Api_Manager;
 import com.example.dishdiary.data.remote.authentication_remote.FireBaseManager;
-import com.example.dishdiary.ui.home_compomemts.view.CountryRecyclerAdapter;
+
 import com.example.dishdiary.ui.meal_details_components.view.MealDetailActivity;
 import com.example.dishdiary.ui.search_compomemts.presenter.SearchPresenter;
 import com.google.android.material.chip.Chip;
