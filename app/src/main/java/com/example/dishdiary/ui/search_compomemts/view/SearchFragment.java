@@ -79,7 +79,7 @@ public class SearchFragment extends Fragment implements ISearchFragment, SearchR
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_search, container, false);
-        searchPresenter = new SearchPresenter(RepoImpl.getInstance(Api_Manager.getInstance(), LocalDataBaseImpl.getInstance(requireContext()),
+        searchPresenter = new SearchPresenter(RepoImpl.getInstance(Api_Manager.getInstance(requireContext()), LocalDataBaseImpl.getInstance(requireContext()),
                 AuthSharedPref.getInstance(requireContext()), FireBaseManager.getInstance()),this);
 
         initViews(view);

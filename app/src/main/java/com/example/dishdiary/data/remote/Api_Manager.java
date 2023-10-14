@@ -1,6 +1,7 @@
 package com.example.dishdiary.data.remote;
 
 
+import android.content.Context;
 import android.util.Log;
 
 
@@ -13,8 +14,18 @@ import com.example.dishdiary.data.model.IngredientResponse;
 import com.example.dishdiary.data.model.MealResponse;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.concurrent.TimeUnit;
+
 import hu.akarnokd.rxjava3.retrofit.RxJava3CallAdapterFactory;
 import io.reactivex.rxjava3.core.Observable;
+import okhttp3.Cache;
+import okhttp3.CacheControl;
+import okhttp3.Interceptor;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -25,19 +36,73 @@ public class Api_Manager implements RemoteSource {
     private static final String TAG ="Api Client";
     private static Api_Manager instance = null;
     ApiService apiService;
-    private Api_Manager(){
+    Context context;
+    private Api_Manager(Context context){
+        this.context = context;
+        File cashDirectory = new File(context.getCacheDir(),"offline_cash_directory");
+        Cache cash =  new Cache(cashDirectory,10*1024*1024);
+
+        OkHttpClient okHttp = new OkHttpClient.Builder()
+                .cache(cash)
+                .addNetworkInterceptor(provideCacheInterceptor())
+                .addInterceptor(provideOfflineCacheInterceptor())
+                .build();
+
         Gson gson = new GsonBuilder().setLenient().create();
+
+
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Constants.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
+                .client(okHttp)
                 .build();
         apiService = retrofit.create(ApiService.class);
     }
 
-    public static Api_Manager getInstance(){
+    private static Interceptor provideOfflineCacheInterceptor() {
+
+        return chain -> {
+
+            try {
+                return chain.proceed(chain.request());
+            }catch (Exception e){
+
+                 CacheControl cacheControl = new CacheControl.Builder()
+                         .onlyIfCached()
+                         .maxStale(1,TimeUnit.DAYS)
+                         .build();
+
+                Request offlineRequest = chain.request().newBuilder()
+                         .cacheControl(cacheControl)
+                         .build();
+                return chain.proceed(offlineRequest);
+            }
+
+
+        };
+    }
+
+    private static Interceptor provideCacheInterceptor() {
+        return      new Interceptor() {
+            @Override
+            public okhttp3.Response intercept(Chain chain) throws IOException {
+
+                okhttp3.Response response = chain.proceed(chain.request());
+
+                 CacheControl cacheControl = new  CacheControl.Builder()
+                         .maxAge(4,TimeUnit.SECONDS)
+                         .maxStale(10,TimeUnit.SECONDS).build();
+
+                return response.newBuilder()
+                        .header("Cache-Controller",cacheControl.toString()).build();
+            }
+        };
+    }
+
+    public static Api_Manager getInstance(Context context){
         if(instance == null){
-            return new Api_Manager();
+            return new Api_Manager(context);
         }
         return instance;
     }

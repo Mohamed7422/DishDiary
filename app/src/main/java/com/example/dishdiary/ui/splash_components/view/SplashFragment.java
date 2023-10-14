@@ -37,7 +37,7 @@ public class SplashFragment extends Fragment implements ISplashView {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_splash, container, false);
 
-        presenter = new SplashPresenter(RepoImpl.getInstance(Api_Manager.getInstance(), LocalDataBaseImpl.getInstance(getContext()), AuthSharedPref.getInstance(getContext()),
+        presenter = new SplashPresenter(RepoImpl.getInstance(Api_Manager.getInstance(requireContext()), LocalDataBaseImpl.getInstance(getContext()), AuthSharedPref.getInstance(getContext()),
                 FireBaseManager.getInstance()),this);
 
         new Handler().postDelayed(() -> {

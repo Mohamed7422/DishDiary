@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.AlertDialog;
-import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -17,9 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.example.dishdiary.MainActivity;
 import com.example.dishdiary.R;
-import com.example.dishdiary.data.Repository.Repo;
 import com.example.dishdiary.data.Repository.RepoImpl;
 import com.example.dishdiary.data.local.LocalDataBaseImpl;
 import com.example.dishdiary.data.model.authDTO.AuthSharedPref;
@@ -27,10 +24,8 @@ import com.example.dishdiary.data.model.dto.IngredientDTO;
 import com.example.dishdiary.data.model.dto.MealPlanDTO;
 import com.example.dishdiary.data.model.dto.MealsItemDTO;
 import com.example.dishdiary.data.remote.Api_Manager;
-import com.example.dishdiary.data.remote.RemoteSource;
 import com.example.dishdiary.data.remote.authentication_remote.FireBaseManager;
 import com.example.dishdiary.ui.SplashActivity;
-import com.example.dishdiary.ui.log_in_compomemts.view.LogInFragment;
 import com.example.dishdiary.ui.meal_details_components.presenter.IMealDetailsPresenter;
 import com.example.dishdiary.ui.meal_details_components.presenter.MealsDetailsPresenter;
 import com.google.android.material.snackbar.Snackbar;
@@ -295,7 +290,7 @@ public class MealDetailActivity extends AppCompatActivity {
         ingredientItemRV.setLayoutManager(layoutManager);
 
 
-        mealDetailsPresenter = new MealsDetailsPresenter(RepoImpl.getInstance(Api_Manager.getInstance(), LocalDataBaseImpl.getInstance(getApplicationContext()),
+        mealDetailsPresenter = new MealsDetailsPresenter(RepoImpl.getInstance(Api_Manager.getInstance(getApplicationContext()), LocalDataBaseImpl.getInstance(getApplicationContext()),
                 AuthSharedPref.getInstance(getApplicationContext()), FireBaseManager.getInstance()));
 
     }

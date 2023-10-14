@@ -5,7 +5,6 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -19,7 +18,6 @@ import com.example.dishdiary.R;
 import com.example.dishdiary.data.Repository.RepoImpl;
 import com.example.dishdiary.data.local.LocalDataBaseImpl;
 import com.example.dishdiary.data.model.authDTO.AuthSharedPref;
-import com.example.dishdiary.data.model.authDTO.ISharedPref;
 import com.example.dishdiary.data.model.dto.MealsItemDTO;
 import com.example.dishdiary.data.remote.Api_Manager;
 import com.example.dishdiary.data.remote.authentication_remote.FireBaseManager;
@@ -61,7 +59,7 @@ public class FavouriteMealsFragment extends Fragment implements IFavouriteMeals
         initViews(view);
 
 
-        presenter = new Presenter(RepoImpl.getInstance(Api_Manager.getInstance(), LocalDataBaseImpl.getInstance(requireContext()),
+        presenter = new Presenter(RepoImpl.getInstance(Api_Manager.getInstance(getContext()), LocalDataBaseImpl.getInstance(requireContext()),
                 AuthSharedPref.getInstance(requireContext()), FireBaseManager.getInstance()),this);
 
         if (FirebaseAuth.getInstance().getCurrentUser()!=null){

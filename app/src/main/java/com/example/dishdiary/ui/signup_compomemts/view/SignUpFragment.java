@@ -3,10 +3,7 @@ package com.example.dishdiary.ui.signup_compomemts.view;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
@@ -57,7 +54,7 @@ public class SignUpFragment extends Fragment implements ISignUp {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_sign_up, container, false);
-        presenter  = new SignUpPresenter(RepoImpl.getInstance(Api_Manager.getInstance(), LocalDataBaseImpl.getInstance(getContext()),
+        presenter  = new SignUpPresenter(RepoImpl.getInstance(Api_Manager.getInstance(requireContext()), LocalDataBaseImpl.getInstance(getContext()),
                 AuthSharedPref.getInstance(getContext()), FireBaseManager.getInstance()),this);
 
         initViews(view);

@@ -50,6 +50,7 @@ dependencies {
     implementation ("com.google.code.gson:gson:2.9.1")
     implementation  ("com.squareup.retrofit2:retrofit:2.9.0")
     implementation  ("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation  ("com.squareup.okhttp:okhttp:2.3.0")
 
     //GLIDE For Image Processing
     implementation("com.github.bumptech.glide:glide:4.14.2")

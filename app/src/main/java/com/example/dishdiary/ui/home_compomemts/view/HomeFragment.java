@@ -36,7 +36,6 @@ import com.example.dishdiary.ui.meal_details_components.view.MealDetailActivity;
 import com.example.dishdiary.ui.home_compomemts.presenter.HomePresenter;
 import com.example.dishdiary.ui.home_compomemts.presenter.IHomePresenter;
 import com.facebook.shimmer.ShimmerFrameLayout;
-import com.google.android.material.progressindicator.LinearProgressIndicator;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -80,7 +79,7 @@ public class HomeFragment extends Fragment  implements IHomeFragment , CategoryR
 
         getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
-        homePresenter = new HomePresenter(RepoImpl.getInstance(Api_Manager.getInstance(), LocalDataBaseImpl.getInstance(requireContext()),
+        homePresenter = new HomePresenter(RepoImpl.getInstance(Api_Manager.getInstance(requireContext()), LocalDataBaseImpl.getInstance(requireContext()),
                 AuthSharedPref.getInstance(requireContext()), FireBaseManager.getInstance()),this);
 
 

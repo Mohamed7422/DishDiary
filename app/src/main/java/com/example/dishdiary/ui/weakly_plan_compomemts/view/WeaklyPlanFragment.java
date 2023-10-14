@@ -15,9 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.dishdiary.R;
 import com.example.dishdiary.data.Repository.RepoImpl;
@@ -74,7 +72,7 @@ public class WeaklyPlanFragment extends Fragment implements IWeakPlan, WeakDaysR
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        presenter = new WeakPlanPresenter(this, RepoImpl.getInstance(Api_Manager.getInstance(), LocalDataBaseImpl.getInstance(requireContext()),
+        presenter = new WeakPlanPresenter(this, RepoImpl.getInstance(Api_Manager.getInstance(requireContext()), LocalDataBaseImpl.getInstance(requireContext()),
                 AuthSharedPref.getInstance(requireContext()), FireBaseManager.getInstance()));
         initView(view);
 

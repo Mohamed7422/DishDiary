@@ -52,7 +52,8 @@ public class SearchPresenter implements FilterNetworkDelegate , NetworkDelegate 
         ingredients.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
-                        ingredientResponse -> view.appendIngredientResult(ingredientResponse.getMeals())
+                        ingredientResponse -> view.appendIngredientResult(ingredientResponse.getMeals()),
+                        error -> System.out.println(error+" From Search PResenter")
                 );
     }
 

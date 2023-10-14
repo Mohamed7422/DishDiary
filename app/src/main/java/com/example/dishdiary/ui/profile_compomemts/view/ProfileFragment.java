@@ -6,8 +6,6 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
@@ -17,7 +15,6 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.dishdiary.MainActivity;
 import com.example.dishdiary.R;
 import com.example.dishdiary.data.Repository.RepoImpl;
 import com.example.dishdiary.data.local.LocalDataBaseImpl;
@@ -65,7 +62,7 @@ public class ProfileFragment extends Fragment implements IProfileV{
         initUi(view);
 
         if (FirebaseAuth.getInstance().getCurrentUser() != null){
-            presenter =  new ProfilePresenter(RepoImpl.getInstance(Api_Manager.getInstance(),
+            presenter =  new ProfilePresenter(RepoImpl.getInstance(Api_Manager.getInstance(requireContext()),
                     LocalDataBaseImpl.getInstance(getContext()),
                     AuthSharedPref.getInstance(getContext()), FireBaseManager.getInstance()),this);
 

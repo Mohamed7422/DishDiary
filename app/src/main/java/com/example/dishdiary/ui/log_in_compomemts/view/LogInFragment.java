@@ -6,7 +6,6 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
@@ -25,8 +24,6 @@ import com.example.dishdiary.data.model.authDTO.AuthSharedPref;
 import com.example.dishdiary.data.model.authDTO.AuthenticationPoJo;
 import com.example.dishdiary.data.remote.Api_Manager;
 import com.example.dishdiary.data.remote.authentication_remote.FireBaseManager;
-import com.example.dishdiary.ui.SplashActivity;
-import com.example.dishdiary.ui.home_compomemts.view.HomeFragment;
 import com.example.dishdiary.ui.log_in_compomemts.log_in_Presenter.LogInPresenter;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -41,8 +38,6 @@ import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
-import com.google.firebase.auth.OAuthCredential;
-import com.google.firebase.auth.OAuthProvider;
 
 import java.util.regex.Pattern;
 
@@ -72,7 +67,7 @@ public class LogInFragment extends Fragment implements ILogIn {
 
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_log_in, container, false);
-        presenter = new LogInPresenter(RepoImpl.getInstance(Api_Manager.getInstance(), LocalDataBaseImpl.getInstance(getContext()), AuthSharedPref.getInstance(getContext()), FireBaseManager.getInstance()), this);
+        presenter = new LogInPresenter(RepoImpl.getInstance(Api_Manager.getInstance(requireContext()), LocalDataBaseImpl.getInstance(getContext()), AuthSharedPref.getInstance(getContext()), FireBaseManager.getInstance()), this);
         initViews(view);
 
         //handle reset here
